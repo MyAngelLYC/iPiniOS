@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001602EE19488D8D00CA8EDD /* title_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602ED19488D8D00CA8EDD /* title_bar.png */; };
+		001602F019488DA300CA8EDD /* nearby_function.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602EF19488DA300CA8EDD /* nearby_function.png */; };
+		001602F319488DAE00CA8EDD /* release_function.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602F119488DAE00CA8EDD /* release_function.png */; };
+		001602F419488DAE00CA8EDD /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602F219488DAE00CA8EDD /* settings_button.png */; };
+		001602F719488DCE00CA8EDD /* Icon@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602F519488DCE00CA8EDD /* Icon@2x-1.png */; };
+		001602F819488DCE00CA8EDD /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602F619488DCE00CA8EDD /* LaunchImage@2x.png */; };
 		00A5254919487F0700450943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A5254819487F0700450943 /* Foundation.framework */; };
 		00A5254B19487F0700450943 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A5254A19487F0700450943 /* CoreGraphics.framework */; };
 		00A5254D19487F0700450943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A5254C19487F0700450943 /* UIKit.framework */; };
@@ -35,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		001602ED19488D8D00CA8EDD /* title_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_bar.png; sourceTree = "<group>"; };
+		001602EF19488DA300CA8EDD /* nearby_function.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nearby_function.png; sourceTree = "<group>"; };
+		001602F119488DAE00CA8EDD /* release_function.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = release_function.png; sourceTree = "<group>"; };
+		001602F219488DAE00CA8EDD /* settings_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_button.png; sourceTree = "<group>"; };
+		001602F519488DCE00CA8EDD /* Icon@2x-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x-1.png"; sourceTree = "<group>"; };
+		001602F619488DCE00CA8EDD /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
 		00A5254519487F0700450943 /* iPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A5254819487F0700450943 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00A5254A19487F0700450943 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +93,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		001602EC19488D7700CA8EDD /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				001602ED19488D8D00CA8EDD /* title_bar.png */,
+				001602EF19488DA300CA8EDD /* nearby_function.png */,
+				001602F119488DAE00CA8EDD /* release_function.png */,
+				001602F219488DAE00CA8EDD /* settings_button.png */,
+				001602F519488DCE00CA8EDD /* Icon@2x-1.png */,
+				001602F619488DCE00CA8EDD /* LaunchImage@2x.png */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
 		00A5253C19487F0700450943 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +144,7 @@
 				00A5255A19487F0700450943 /* iPinAppDelegate.m */,
 				00A5255F19487F0700450943 /* Images.xcassets */,
 				00A5255C19487F0700450943 /* iPin.xcdatamodeld */,
+				001602EC19488D7700CA8EDD /* Image */,
 				00A5255119487F0700450943 /* Supporting Files */,
 			);
 			path = iPin;
@@ -229,8 +255,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				001602F019488DA300CA8EDD /* nearby_function.png in Resources */,
+				001602F719488DCE00CA8EDD /* Icon@2x-1.png in Resources */,
 				00A5255519487F0700450943 /* InfoPlist.strings in Resources */,
 				00A5256019487F0700450943 /* Images.xcassets in Resources */,
+				001602EE19488D8D00CA8EDD /* title_bar.png in Resources */,
+				001602F819488DCE00CA8EDD /* LaunchImage@2x.png in Resources */,
+				001602F419488DAE00CA8EDD /* settings_button.png in Resources */,
+				001602F319488DAE00CA8EDD /* release_function.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +482,7 @@
 				00A5257919487F0800450943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		00A5257A19487F0800450943 /* Build configuration list for PBXNativeTarget "iPinTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +491,7 @@
 				00A5257C19487F0800450943 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
