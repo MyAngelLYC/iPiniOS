@@ -316,7 +316,7 @@
 @implementation RefreshHeaderAndFooterView
 @synthesize refreshHeaderView = _refreshHeaderView;
 @synthesize refreshFooterView = _refreshFooterView;
-@synthesize delegate ;//=_delegate;
+@synthesize delegate ;
 
 - (id)initWithFrame:(CGRect)frame
 {

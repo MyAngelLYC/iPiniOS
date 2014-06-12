@@ -14,8 +14,8 @@
 
 @implementation iPinMainViewController
 
-@synthesize refreshHeaderAndFooterView ;//= _refreshHeaderAndFooterView;
-@synthesize reloading ;//= _reloading;
+@synthesize refreshHeaderAndFooterView ;
+@synthesize reloading ;
 @synthesize myScrollView;
 @synthesize myTableView;
 
@@ -43,7 +43,6 @@
     [[self view] addSubview:titleView];
     
     UIView *bottomView=[[UIView alloc] initWithFrame:CGRectMake(0, 405, 320, 55)];
-    
     UIImageView *bottomBackground=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
     [bottomBackground setBounds:CGRectMake(0, 0, 320, 480)];
     [bottomView addSubview:bottomBackground];
@@ -57,14 +56,25 @@
     [bottomView addSubview:nearbyButton];
     [[self view] addSubview:bottomView];
     
-    UITableView *listTable=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 362) style:UITableViewStylePlain];
+    UITableView *listTable=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 360) style:UITableViewStylePlain];
     [listTable setDelegate:self];
     [listTable setDataSource:self];
     UINib *nib=[UINib nibWithNibName:@"iPinListTableViewCell" bundle:nil];
     [listTable registerNib:nib forCellReuseIdentifier:@"iPinListTableViewCell"];
     [self setMyTableView:listTable];
-    //[listTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    //[[self view] addSubview:listTable];
+    
+    UIScrollView *scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 43, 320, 360)];
+    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height*2)];
+    [scrollView setDelegate:self];
+    //[scrollView addSubview:listTable];
+    [self setMyScrollView:scrollView];
+    RefreshHeaderAndFooterView *view = [[RefreshHeaderAndFooterView alloc] initWithFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
+    view.delegate = self;
+    self.refreshHeaderAndFooterView = view;
+    [self.refreshHeaderAndFooterView.refreshHeaderView updateRefreshDate:[NSDate date]];
+    [[self view] addSubview:scrollView];
+    [myScrollView addSubview:view];
+    [view addSubview:listTable];
     
     listItem=[[NSMutableArray alloc] init];
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"ussam" sex:@"男" telephone:@"15105178519" fromPlace:@"东大西门" toPlace:@"百家湖" date:@"2014-6-9" detail:@"只限妹子" seats:@"1"]];
@@ -72,21 +82,7 @@
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
-    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
-    
-    UIScrollView *scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 43, 320, 362)];
-    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height*2)];
-    [scrollView setDelegate:self];
-    [scrollView addSubview:listTable];
-    [[self view] addSubview:scrollView];
-    [self setMyScrollView:scrollView];
-    RefreshHeaderAndFooterView *view = [[RefreshHeaderAndFooterView alloc] initWithFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
-    view.delegate = self;
-    [myScrollView addSubview:view];
-    self.refreshHeaderAndFooterView = view;
-    [self.refreshHeaderAndFooterView.refreshHeaderView updateRefreshDate:[NSDate date]];
-    
-    //listTable.frame = CGRectMake(self.myScrollView.frame.origin.x, self.myScrollView.frame.origin.y, self.myScrollView.frame.size.width, self.myScrollView.contentSize.height);
+    //[listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
     
 }
 
@@ -100,16 +96,17 @@
 {
     
     int count=[listItem count];
-    float height=88;
-    if(height*count>362)
+    iPinListTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"iPinListTableViewCell"];
+    float height=[[cell contentView] bounds].size.height;
+    if(height*count>360)
     {
-        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, height*count+10)];
-        [myTableView setFrame:CGRectMake(0, 0, 320, height*count+10)];
+        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, height*count+8)];
+        [myTableView setFrame:CGRectMake(0, 0, 320, height*count+8)];
     }
     else
     {
-        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, 362+100)];
-        [myTableView setFrame:CGRectMake(0, 0, 320, 362+5)];
+        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, 360+1)];
+        [myTableView setFrame:CGRectMake(0, 0, 320, 360+1)];
     }
     
     [refreshHeaderAndFooterView removeFromSuperview];
@@ -117,6 +114,7 @@
     view.delegate = self;
     [myScrollView addSubview:view];
     self.refreshHeaderAndFooterView = view;
+    [view addSubview:myTableView];
     return [listItem count];
 
 }

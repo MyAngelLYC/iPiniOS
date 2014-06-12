@@ -19,6 +19,6 @@
 @property(nonatomic,strong)RefreshHeaderAndFooterView * refreshHeaderAndFooterView;
 @property(nonatomic,assign)BOOL reloading;
 @property(nonatomic,weak)UIScrollView *myScrollView;
-@property(nonatomic,weak)UITableView *myTableView;
+@property(nonatomic,strong)UITableView *myTableView;
 
 @end
