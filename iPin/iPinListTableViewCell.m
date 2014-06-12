@@ -9,7 +9,7 @@
 #import "iPinListTableViewCell.h"
 
 @implementation iPinListTableViewCell
-@synthesize backImage;
+@synthesize backImage,fromPlace,toPlace,time,username,seats;
 
 - (void)awakeFromNib
 {
@@ -26,5 +26,15 @@
 - (void)changeSex
 {
     [backImage setImage:[UIImage imageNamed:@"information_frame_female"]];
+}
+
+- (void)setItem:(iPinListItem *)item
+{
+    [fromPlace setText:[item fromPlace]];
+    [toPlace setText:[item toPlace]];
+    [time setText:[item date]];
+    [username setText:[item username]];
+    [seats setText:[item seats]];
+    if([[item sex] isEqual:@"女"]) [self changeSex];
 }
 @end

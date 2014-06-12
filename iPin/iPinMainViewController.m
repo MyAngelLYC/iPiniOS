@@ -57,7 +57,12 @@
     [listTable setDataSource:self];
     UINib *nib=[UINib nibWithNibName:@"iPinListTableViewCell" bundle:nil];
     [listTable registerNib:nib forCellReuseIdentifier:@"iPinListTableViewCell"];
+    //[listTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [[self view] addSubview:listTable];
+    
+    listItem=[[NSMutableArray alloc] init];
+    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"ussam" sex:@"男" telephone:@"15105178519" fromPlace:@"东大西门" toPlace:@"百家湖" date:@"2014-6-9" detail:@"只限妹子" seats:@"1"]];
+    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,17 +74,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //return [listItem count];
-    return 2;
+    return [listItem count];
+    //return 2;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     iPinListTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"iPinListTableViewCell"];
-    if([indexPath row]==1)
-    {
-        [cell changeSex];
-    }
-    
+    [cell setItem:[listItem objectAtIndex:[indexPath row]]];
     return cell;
 }
 
@@ -87,6 +89,16 @@
 {
     iPinListTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"iPinListTableViewCell"];
     return [[cell contentView] bounds].size.height;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int clickItem=[indexPath row];
+    iPinListItem *item=[listItem objectAtIndex:clickItem];
+    NSString *msg=[[NSString alloc] initWithFormat:@"用户：%@\n性别：%@\n电话：%@\n出发：%@\n前往：%@\n日期：%@\n详情：%@",[item username],[item sex],[item telephone],[item fromPlace],[item toPlace],[item date],[item detail]];
+    UIAlertView *myAlert=[[UIAlertView alloc] initWithTitle:@"拼车信息" message:msg delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"打电话",  nil];
+    [myAlert addButtonWithTitle:@"发短信"];
+    [myAlert show];
 }
 /*
 #pragma mark - Navigation

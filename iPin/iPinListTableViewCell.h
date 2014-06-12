@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "iPinListItem.h"
 @interface iPinListTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *backImage;
+@property (weak, nonatomic) IBOutlet UILabel *fromPlace;
+@property (weak, nonatomic) IBOutlet UILabel *toPlace;
+@property (weak, nonatomic) IBOutlet UILabel *time;
+@property (weak, nonatomic) IBOutlet UILabel *username;
+@property (weak, nonatomic) IBOutlet UILabel *seats;
+
 - (void)changeSex;
+- (void)setItem:(iPinListItem *)item;
 @end

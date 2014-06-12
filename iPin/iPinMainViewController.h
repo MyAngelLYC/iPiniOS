@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "iPinListTableViewCell.h"
-
+#import "iPinListItem.h"
 @interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
-
+{
+    NSMutableArray *listItem;
+}
 @end
