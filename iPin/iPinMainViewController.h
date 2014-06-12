@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "iPinListTableViewCell.h"
 #import "iPinListItem.h"
-@interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+#import "RefreshHeaderAndFooterView.h"
+
+@interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate>
 {
     NSMutableArray *listItem;
 }
+
+@property(nonatomic,strong)RefreshHeaderAndFooterView * refreshHeaderAndFooterView;
+@property(nonatomic,assign)BOOL reloading;
+@property(nonatomic,weak)UIScrollView *myScrollView;
+@property(nonatomic,weak)UITableView *myTableView;
+
 @end

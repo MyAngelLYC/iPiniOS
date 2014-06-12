@@ -14,9 +14,13 @@
 		001602F719488DCE00CA8EDD /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602F519488DCE00CA8EDD /* Icon@2x.png */; };
 		001602F819488DCE00CA8EDD /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602F619488DCE00CA8EDD /* LaunchImage@2x.png */; };
 		001602FB19488E9F00CA8EDD /* iPinMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001602FA19488E9F00CA8EDD /* iPinMainViewController.m */; };
+		002CC48619497EAB002A812C /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 002CC48219497EAB002A812C /* blueArrow.png */; };
+		002CC48719497EAB002A812C /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 002CC48319497EAB002A812C /* blueArrow@2x.png */; };
+		002CC48A19497ECC002A812C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002CC48919497ECC002A812C /* QuartzCore.framework */; };
 		004ACFFE1948AC17004149B9 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 004ACFF71948AC17004149B9 /* background@2x.png */; };
 		004AD0081948AC9D004149B9 /* iPinListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 004AD0061948AC9D004149B9 /* iPinListTableViewCell.m */; };
 		004AD0091948AC9D004149B9 /* iPinListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004AD0071948AC9D004149B9 /* iPinListTableViewCell.xib */; };
+		008911A61949CDF800875753 /* RefreshHeaderAndFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 008911A51949CDF800875753 /* RefreshHeaderAndFooterView.m */; };
 		00A5254919487F0700450943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A5254819487F0700450943 /* Foundation.framework */; };
 		00A5254B19487F0700450943 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A5254A19487F0700450943 /* CoreGraphics.framework */; };
 		00A5254D19487F0700450943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A5254C19487F0700450943 /* UIKit.framework */; };
@@ -56,10 +60,15 @@
 		001602F619488DCE00CA8EDD /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
 		001602F919488E9F00CA8EDD /* iPinMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinMainViewController.h; sourceTree = "<group>"; };
 		001602FA19488E9F00CA8EDD /* iPinMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinMainViewController.m; sourceTree = "<group>"; };
+		002CC48219497EAB002A812C /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		002CC48319497EAB002A812C /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		002CC48919497ECC002A812C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		004ACFF71948AC17004149B9 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		004AD0051948AC9D004149B9 /* iPinListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinListTableViewCell.h; sourceTree = "<group>"; };
 		004AD0061948AC9D004149B9 /* iPinListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinListTableViewCell.m; sourceTree = "<group>"; };
 		004AD0071948AC9D004149B9 /* iPinListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = iPinListTableViewCell.xib; sourceTree = "<group>"; };
+		008911A41949CDF800875753 /* RefreshHeaderAndFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshHeaderAndFooterView.h; sourceTree = "<group>"; };
+		008911A51949CDF800875753 /* RefreshHeaderAndFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshHeaderAndFooterView.m; sourceTree = "<group>"; };
 		00A5254519487F0700450943 /* iPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A5254819487F0700450943 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00A5254A19487F0700450943 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -89,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				002CC48A19497ECC002A812C /* QuartzCore.framework in Frameworks */,
 				00A5254B19487F0700450943 /* CoreGraphics.framework in Frameworks */,
 				00A5254F19487F0700450943 /* CoreData.framework in Frameworks */,
 				00A5254D19487F0700450943 /* UIKit.framework in Frameworks */,
@@ -126,6 +136,17 @@
 			name = Image;
 			sourceTree = "<group>";
 		};
+		002CC48119497E88002A812C /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				002CC48219497EAB002A812C /* blueArrow.png */,
+				002CC48319497EAB002A812C /* blueArrow@2x.png */,
+				008911A41949CDF800875753 /* RefreshHeaderAndFooterView.h */,
+				008911A51949CDF800875753 /* RefreshHeaderAndFooterView.m */,
+			);
+			name = Refresh;
+			sourceTree = "<group>";
+		};
 		00A5253C19487F0700450943 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +169,7 @@
 		00A5254719487F0700450943 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				002CC48919497ECC002A812C /* QuartzCore.framework */,
 				00A5254819487F0700450943 /* Foundation.framework */,
 				00A5254A19487F0700450943 /* CoreGraphics.framework */,
 				00A5254C19487F0700450943 /* UIKit.framework */,
@@ -171,6 +193,7 @@
 				004AD0061948AC9D004149B9 /* iPinListTableViewCell.m */,
 				004AD0071948AC9D004149B9 /* iPinListTableViewCell.xib */,
 				00A5255C19487F0700450943 /* iPin.xcdatamodeld */,
+				002CC48119497E88002A812C /* Refresh */,
 				001602EC19488D7700CA8EDD /* Image */,
 				00A5255119487F0700450943 /* Supporting Files */,
 			);
@@ -292,6 +315,8 @@
 				00E5B0E91949454A000740EA /* information_frame_female@2x.png in Resources */,
 				001602F419488DAE00CA8EDD /* settings_button@2X.png in Resources */,
 				004ACFFE1948AC17004149B9 /* background@2x.png in Resources */,
+				002CC48719497EAB002A812C /* blueArrow@2x.png in Resources */,
+				002CC48619497EAB002A812C /* blueArrow.png in Resources */,
 				001602F319488DAE00CA8EDD /* release_function@2X.png in Resources */,
 				00E5B0EA1949454A000740EA /* information_frame_male@2x.png in Resources */,
 			);
@@ -313,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				004AD0081948AC9D004149B9 /* iPinListTableViewCell.m in Sources */,
+				008911A61949CDF800875753 /* RefreshHeaderAndFooterView.m in Sources */,
 				00A5255E19487F0700450943 /* iPin.xcdatamodeld in Sources */,
 				00A5255B19487F0700450943 /* iPinAppDelegate.m in Sources */,
 				00A5255719487F0700450943 /* main.m in Sources */,

@@ -19,6 +19,7 @@
 @property(nonatomic,strong) NSString *detail;
 @property(nonatomic,strong) NSString *seats;
 
+
 - (iPinListItem*)initWithUsername:(NSString *)Username sex:(NSString *)Sex telephone:(NSString *)Telephone fromPlace:(NSString *)FromPlace toPlace:(NSString *)ToPlace date:(NSString *)Date detail:(NSString *)Detail seats:(NSString *)Seats;
 
 @end

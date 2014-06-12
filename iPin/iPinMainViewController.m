@@ -14,6 +14,11 @@
 
 @implementation iPinMainViewController
 
+@synthesize refreshHeaderAndFooterView ;//= _refreshHeaderAndFooterView;
+@synthesize reloading ;//= _reloading;
+@synthesize myScrollView;
+@synthesize myTableView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,17 +57,37 @@
     [bottomView addSubview:nearbyButton];
     [[self view] addSubview:bottomView];
     
-    UITableView *listTable=[[UITableView alloc] initWithFrame:CGRectMake(0, 43, 320, 362) style:UITableViewStylePlain];
+    UITableView *listTable=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 362) style:UITableViewStylePlain];
     [listTable setDelegate:self];
     [listTable setDataSource:self];
     UINib *nib=[UINib nibWithNibName:@"iPinListTableViewCell" bundle:nil];
     [listTable registerNib:nib forCellReuseIdentifier:@"iPinListTableViewCell"];
+    [self setMyTableView:listTable];
     //[listTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [[self view] addSubview:listTable];
+    //[[self view] addSubview:listTable];
     
     listItem=[[NSMutableArray alloc] init];
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"ussam" sex:@"男" telephone:@"15105178519" fromPlace:@"东大西门" toPlace:@"百家湖" date:@"2014-6-9" detail:@"只限妹子" seats:@"1"]];
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
+    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
+    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
+    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
+    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
+    
+    UIScrollView *scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 43, 320, 362)];
+    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height*2)];
+    [scrollView setDelegate:self];
+    [scrollView addSubview:listTable];
+    [[self view] addSubview:scrollView];
+    [self setMyScrollView:scrollView];
+    RefreshHeaderAndFooterView *view = [[RefreshHeaderAndFooterView alloc] initWithFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
+    view.delegate = self;
+    [myScrollView addSubview:view];
+    self.refreshHeaderAndFooterView = view;
+    [self.refreshHeaderAndFooterView.refreshHeaderView updateRefreshDate:[NSDate date]];
+    
+    //listTable.frame = CGRectMake(self.myScrollView.frame.origin.x, self.myScrollView.frame.origin.y, self.myScrollView.frame.size.width, self.myScrollView.contentSize.height);
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,9 +98,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //return [listItem count];
+    
+    int count=[listItem count];
+    float height=88;
+    if(height*count>362)
+    {
+        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, height*count+10)];
+        [myTableView setFrame:CGRectMake(0, 0, 320, height*count+10)];
+    }
+    else
+    {
+        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, 362+100)];
+        [myTableView setFrame:CGRectMake(0, 0, 320, 362+5)];
+    }
+    
+    [refreshHeaderAndFooterView removeFromSuperview];
+    RefreshHeaderAndFooterView *view = [[RefreshHeaderAndFooterView alloc] initWithFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
+    view.delegate = self;
+    [myScrollView addSubview:view];
+    self.refreshHeaderAndFooterView = view;
     return [listItem count];
-    //return 2;
+
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,5 +153,48 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)doneLoadingViewData{
+	
+	//  model should call this when its done loading
+	self.reloading = NO;
+    [self.refreshHeaderAndFooterView RefreshScrollViewDataSourceDidFinishedLoading:self.myScrollView];
+	
+}
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+    [self.refreshHeaderAndFooterView RefreshScrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self.refreshHeaderAndFooterView RefreshScrollViewDidEndDragging:scrollView];
+	
+}
+#pragma mark -
+#pragma mark RefreshHeaderAndFooterViewDelegate Methods
+
+- (void)RefreshHeaderAndFooterDidTriggerRefresh:(RefreshHeaderAndFooterView*)view{
+	self.reloading = YES;
+    if (view.refreshHeaderView.state == PullRefreshLoading) {//下拉刷新动作的内容
+        NSLog(@"header");
+        [self performSelector:@selector(doneLoadingViewData) withObject:nil afterDelay:3.0];
+        
+    }else if(view.refreshFooterView.state == PullRefreshLoading){//上拉加载更多动作的内容
+        NSLog(@"footer");
+        [self performSelector:@selector(doneLoadingViewData) withObject:nil afterDelay:3.0];
+    }
+}
+
+- (BOOL)RefreshHeaderAndFooterDataSourceIsLoading:(RefreshHeaderAndFooterView*)view{
+	
+	return self.reloading; // should return if data source model is reloading
+	
+}
+- (NSDate*)RefreshHeaderAndFooterDataSourceLastUpdated:(RefreshHeaderAndFooterView*)view{
+    return [NSDate date];
+}
 
 @end
