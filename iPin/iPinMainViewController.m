@@ -18,6 +18,10 @@
 @synthesize reloading ;
 @synthesize myScrollView;
 @synthesize myTableView;
+@synthesize mainView;
+@synthesize infoView;
+@synthesize overlayView;
+@synthesize tapGesture;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +36,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIView *mMainView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
+    UIView *mInfoView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
+    UIView *mOverlayView=[[UIView alloc] initWithFrame:CGRectMake(280, 0, 320, 460)];
+    [self setMainView:mMainView];
+    [self setInfoView:mInfoView];
+    [self setOverlayView:mOverlayView];
+    [[self view] addSubview:mMainView];
+    [[self view] addSubview:mInfoView];
+    [[self view] addSubview:mOverlayView];
+    [[self view] sendSubviewToBack:mInfoView];
+    [[self view] sendSubviewToBack:mOverlayView];
+    [[self view] bringSubviewToFront:mMainView];
+    [self setTapGesture:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClose)]];
+    
     UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 43)];
     UIImageView *titleBackground=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title_bar"]];
     [titleBackground setBounds:CGRectMake(0, 0, 320, 43)];
@@ -39,8 +57,9 @@
     UIButton *myInfoButton=[[UIButton alloc] initWithFrame:CGRectMake(10, 9, 28, 25)];
     [myInfoButton setBackgroundImage:[UIImage imageNamed:@"settings_button"] forState:UIControlStateNormal];
     [myInfoButton setBackgroundImage:[UIImage imageNamed:@"settings_button"] forState:UIControlStateHighlighted];
+    [myInfoButton addTarget:self action:@selector(onMyInfoButton) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:myInfoButton];
-    [[self view] addSubview:titleView];
+    [[self mainView] addSubview:titleView];
     
     UIView *bottomView=[[UIView alloc] initWithFrame:CGRectMake(0, 405, 320, 55)];
     UIImageView *bottomBackground=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
@@ -54,7 +73,7 @@
     [nearbyButton setBackgroundImage:[UIImage imageNamed:@"nearby_function"] forState:UIControlStateNormal];
     [nearbyButton setBackgroundImage:[UIImage imageNamed:@"nearby_function"] forState:UIControlStateHighlighted];
     [bottomView addSubview:nearbyButton];
-    [[self view] addSubview:bottomView];
+    [[self mainView] addSubview:bottomView];
     
     UITableView *listTable=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 360) style:UITableViewStylePlain];
     [listTable setDelegate:self];
@@ -72,7 +91,7 @@
     view.delegate = self;
     self.refreshHeaderAndFooterView = view;
     [self.refreshHeaderAndFooterView.refreshHeaderView updateRefreshDate:[NSDate date]];
-    [[self view] addSubview:scrollView];
+    [[self mainView] addSubview:scrollView];
     [myScrollView addSubview:view];
     [view addSubview:listTable];
     
@@ -84,6 +103,15 @@
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
     //[listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
     
+    UIButton *setPassword=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [setPassword setFrame:CGRectMake(10,10, 100, 30)];
+    [setPassword setTitle:@"Click" forState:UIControlStateNormal];
+    [setPassword addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(50, 50, 100, 50)];
+    [label setText:@"个人设置页面"];
+    [[self infoView] addSubview:setPassword];
+    [[self infoView] addSubview:label];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -195,4 +223,28 @@
     return [NSDate date];
 }
 
+- (void)onMyInfoButton
+{
+    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        self.mainView.frame = CGRectMake(280, 0, 320, 460);
+    } completion:^(BOOL finished) {
+        [[self view] bringSubviewToFront:[self overlayView]];
+        [[self overlayView] addGestureRecognizer:[self tapGesture]];
+    }];
+}
+
+- (void)tapClose
+{
+    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        self.mainView.frame = CGRectMake(0, 0, 320, 460);
+    } completion:^(BOOL finished) {
+        [[self view] bringSubviewToFront:[self mainView]];
+        [[self overlayView] removeGestureRecognizer:[self tapGesture]];
+    }];
+}
+
+- (void)onClick
+{
+    NSLog(@"OnClick");
+}
 @end

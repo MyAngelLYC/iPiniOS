@@ -20,5 +20,12 @@
 @property(nonatomic,assign)BOOL reloading;
 @property(nonatomic,weak)UIScrollView *myScrollView;
 @property(nonatomic,strong)UITableView *myTableView;
+@property(nonatomic,weak)UIView *mainView;
+@property(nonatomic,weak)UIView *infoView;
+@property(nonatomic,weak)UIView *overlayView;
+@property(nonatomic,strong)UIGestureRecognizer *tapGesture;
 
+- (void)onMyInfoButton;
+- (void)tapClose;
+- (void)onClick;
 @end
