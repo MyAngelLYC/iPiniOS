@@ -10,6 +10,7 @@
 #import "iPinListTableViewCell.h"
 #import "iPinListItem.h"
 #import "RefreshHeaderAndFooterView.h"
+#import "iPinPublishViewController.h"
 
 @interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate>
 {
@@ -27,5 +28,6 @@
 
 - (void)onMyInfoButton;
 - (void)tapClose;
+- (void)onPublishButton;
 - (void)onClick;
 @end

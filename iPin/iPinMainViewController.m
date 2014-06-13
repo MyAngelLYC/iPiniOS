@@ -68,6 +68,7 @@
     UIButton *publishButton=[[UIButton alloc] initWithFrame:CGRectMake(12.5, 10, 140, 35)];
     [publishButton setBackgroundImage:[UIImage imageNamed:@"release_function"] forState:UIControlStateNormal];
     [publishButton setBackgroundImage:[UIImage imageNamed:@"release_function"] forState:UIControlStateHighlighted];
+    [publishButton addTarget:self action:@selector(onPublishButton) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:publishButton];
     UIButton *nearbyButton=[[UIButton alloc] initWithFrame:CGRectMake(167.5, 10, 140, 35)];
     [nearbyButton setBackgroundImage:[UIImage imageNamed:@"nearby_function"] forState:UIControlStateNormal];
@@ -241,6 +242,11 @@
         [[self view] bringSubviewToFront:[self mainView]];
         [[self overlayView] removeGestureRecognizer:[self tapGesture]];
     }];
+}
+
+- (void)onPublishButton
+{
+    [self presentViewController:[[iPinPublishViewController alloc] init] animated:YES completion:nil];
 }
 
 - (void)onClick
