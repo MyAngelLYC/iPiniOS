@@ -88,9 +88,10 @@
     [dateView setPlaceholder:@"还有什么额外要求，告诉拼友吧"];
     [dateImageView addSubview:dateView];
     
-    //UIButton *publishButton=[[UIButton alloc] initWithFrame:CGRectMake(20, 11.75f, 10, 20)];
-    //[publishButton setBackgroundImage:[UIImage imageNamed:@"back_function"] forState:UIControlStateNormal];
-    //[publishButton setBackgroundImage:[UIImage imageNamed:@"back_function"] forState:UIControlStateHighlighted];
+    UIButton *publishButton=[[UIButton alloc] initWithFrame:CGRectMake(0, 360, 320, 40)];
+    [publishButton setBackgroundImage:[UIImage imageNamed:@"release_confirm_button"] forState:UIControlStateNormal];
+    [publishButton setBackgroundImage:[UIImage imageNamed:@"release_confirm_button"] forState:UIControlStateHighlighted];
+    [[self view] addSubview:publishButton];
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,6 +11,7 @@
 #import "iPinListItem.h"
 #import "RefreshHeaderAndFooterView.h"
 #import "iPinPublishViewController.h"
+#import "iPinNearbyViewController.h"
 
 @interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate>
 {
@@ -25,9 +26,13 @@
 @property(nonatomic,weak)UIView *infoView;
 @property(nonatomic,weak)UIView *overlayView;
 @property(nonatomic,strong)UIGestureRecognizer *tapGesture;
+@property(nonatomic,strong)UIGestureRecognizer *panGesture;
+@property(nonatomic)CGPoint mainViewCenter;
+@property(nonatomic)BOOL isMainView;
 
 - (void)onMyInfoButton;
 - (void)tapClose;
 - (void)onPublishButton;
-- (void)onClick;
+- (void)onNearbyButton;
+
 @end

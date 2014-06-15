@@ -22,6 +22,9 @@
 @synthesize infoView;
 @synthesize overlayView;
 @synthesize tapGesture;
+@synthesize panGesture;
+@synthesize mainViewCenter;
+@synthesize isMainView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +52,14 @@
     [[self view] sendSubviewToBack:mOverlayView];
     [[self view] bringSubviewToFront:mMainView];
     [self setTapGesture:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClose)]];
+    [self setPanGesture:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragView:)]];
+    [self setMainViewCenter:[mMainView center]];
+    [self setIsMainView:YES];
+    [mMainView addGestureRecognizer:[self panGesture]];
+    UIImageView *personInfoView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"personal_center_bg"]];
+    [personInfoView setBounds:CGRectMake(0, 0, 280, 460)];
+    [mInfoView addSubview:personInfoView];
+
     
     UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 43)];
     UIImageView *titleBackground=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title_bar"]];
@@ -73,6 +84,7 @@
     UIButton *nearbyButton=[[UIButton alloc] initWithFrame:CGRectMake(167.5, 10, 140, 35)];
     [nearbyButton setBackgroundImage:[UIImage imageNamed:@"nearby_function"] forState:UIControlStateNormal];
     [nearbyButton setBackgroundImage:[UIImage imageNamed:@"nearby_function"] forState:UIControlStateHighlighted];
+    [nearbyButton addTarget:self action:@selector(onNearbyButton) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:nearbyButton];
     [[self mainView] addSubview:bottomView];
     
@@ -103,15 +115,6 @@
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
     //[listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
-    
-    UIButton *setPassword=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [setPassword setFrame:CGRectMake(10,10, 100, 30)];
-    [setPassword setTitle:@"Click" forState:UIControlStateNormal];
-    [setPassword addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(50, 50, 100, 50)];
-    [label setText:@"个人设置页面"];
-    [[self infoView] addSubview:setPassword];
-    [[self infoView] addSubview:label];
 
 }
 
@@ -228,9 +231,13 @@
 {
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.mainView.frame = CGRectMake(280, 0, 320, 460);
+        self.overlayView.frame = CGRectMake(280, 0, 320, 460);
     } completion:^(BOOL finished) {
         [[self view] bringSubviewToFront:[self overlayView]];
         [[self overlayView] addGestureRecognizer:[self tapGesture]];
+        [[self overlayView] addGestureRecognizer:[self panGesture]];
+        [[self mainView] removeGestureRecognizer:[self panGesture]];
+        [self setIsMainView:NO];
     }];
 }
 
@@ -238,10 +245,72 @@
 {
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.mainView.frame = CGRectMake(0, 0, 320, 460);
+        self.overlayView.frame = CGRectMake(0, 0, 320, 460);
     } completion:^(BOOL finished) {
         [[self view] bringSubviewToFront:[self mainView]];
         [[self overlayView] removeGestureRecognizer:[self tapGesture]];
+        [[self overlayView] removeGestureRecognizer:[self panGesture]];
+        [[self mainView] addGestureRecognizer:[self panGesture]];
+        [self setIsMainView:YES];
     }];
+}
+
+- (void)dragView:(id)sender
+{
+    
+    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan)
+    {
+        mainViewCenter=[[self mainView] center];
+    }
+    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded)
+    {
+        mainViewCenter=[[self mainView] center];
+        if(mainViewCenter.x<320)
+        {
+            if(isMainView)
+            {
+                [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                    self.mainView.frame = CGRectMake(0, 0, 320, 460);
+                    self.overlayView.frame = CGRectMake(0, 0, 320, 460);
+                } completion:nil];
+            }
+            else [self tapClose];
+            
+        }
+        else
+        {
+            if(isMainView)
+            {
+                [self onMyInfoButton];
+            }
+            else
+            {
+                [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                    self.mainView.frame = CGRectMake(280, 0, 320, 460);
+                    self.overlayView.frame = CGRectMake(280, 0, 320, 460);
+                } completion:nil];
+            }
+            
+        }
+        mainViewCenter=[[self mainView] center];
+    }
+    if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateChanged)
+    {
+        CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
+        if(isMainView && translatedPoint.x>0)
+        {
+            CGPoint newCenter = CGPointMake(mainViewCenter.x + translatedPoint.x, mainViewCenter.y);
+            [self mainView].center = newCenter;
+            [self overlayView].center=newCenter;
+        }
+        else if (!isMainView && translatedPoint.x<0)
+        {
+            CGPoint newCenter = CGPointMake(mainViewCenter.x + translatedPoint.x, mainViewCenter.y);
+            [self mainView].center = newCenter;
+            [self overlayView].center=newCenter;
+        }
+        
+    }
 }
 
 - (void)onPublishButton
@@ -249,8 +318,8 @@
     [self presentViewController:[[iPinPublishViewController alloc] init] animated:YES completion:nil];
 }
 
-- (void)onClick
+- (void)onNearbyButton
 {
-    NSLog(@"OnClick");
+    [self presentViewController:[[iPinNearbyViewController alloc] init] animated:YES completion:nil];
 }
 @end
