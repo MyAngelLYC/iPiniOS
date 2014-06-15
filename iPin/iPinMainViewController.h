@@ -14,8 +14,9 @@
 #import "iPinPublishViewController.h"
 #import "iPinNearbyViewController.h"
 #import "SGActionView.h"
+#import "AsyncSocket.h"
 
-@interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate,MFMessageComposeViewControllerDelegate>
+@interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate,MFMessageComposeViewControllerDelegate,AsyncSocketDelegate>
 {
     NSMutableArray *listItem;
 }
@@ -31,6 +32,7 @@
 @property(nonatomic,strong)UIGestureRecognizer *panGesture;
 @property(nonatomic)CGPoint mainViewCenter;
 @property(nonatomic)BOOL isMainView;
+@property(nonatomic,strong)AsyncSocket *mSocket;
 
 - (void)onMyInfoButton;
 - (void)tapClose;

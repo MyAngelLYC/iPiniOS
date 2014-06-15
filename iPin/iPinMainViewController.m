@@ -25,6 +25,7 @@
 @synthesize panGesture;
 @synthesize mainViewCenter;
 @synthesize isMainView;
+@synthesize mSocket;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -112,6 +113,20 @@
     [[self mainView] addSubview:scrollView];
     [myScrollView addSubview:view];
     [view addSubview:listTable];
+    
+    
+    
+    if([self mSocket])
+    {
+        [[self mSocket] disconnect];
+        [self setMSocket:nil];
+    }
+    else
+    {
+        [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
+        [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
+        
+    }
     
     listItem=[[NSMutableArray alloc] init];
     [listItem addObject:[[iPinListItem alloc] initWithUsername:@"ussam" sex:@"男" telephone:@"15105178519" fromPlace:@"东大西门" toPlace:@"百家湖" date:@"2014-6-9" detail:@"只限妹子" seats:@"1"]];
@@ -351,6 +366,21 @@
                                          [self presentViewController:controller animated:YES completion:nil];
                                          
                                      }
+                                     break;
+                                 }
+                                 case 2:
+                                 {
+                                     NSLog(@"微博");
+                                     break;
+                                 }
+                                 case 3:
+                                 {
+                                     NSLog(@"微信");
+                                     break;
+                                 }
+                                 case 4:
+                                 {
+                                     NSLog(@"朋友圈");
                                      break;
                                  }
                                  default:
