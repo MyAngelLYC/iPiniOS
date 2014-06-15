@@ -59,6 +59,11 @@
     UIImageView *personInfoView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"personal_center_bg"]];
     [personInfoView setBounds:CGRectMake(0, 0, 280, 460)];
     [mInfoView addSubview:personInfoView];
+    UIButton *shareButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setFrame:CGRectMake(0, 193, 280, 42)];
+    [shareButton addTarget:self action:@selector(onShare) forControlEvents:UIControlEventTouchUpInside];
+    //[shareButton setBackgroundColor:[UIColor whiteColor]];
+    [mInfoView addSubview:shareButton];
 
     
     UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 43)];
@@ -321,5 +326,43 @@
 - (void)onNearbyButton
 {
     [self presentViewController:[[iPinNearbyViewController alloc] init] animated:YES completion:nil];
+}
+
+- (void)onShare
+{
+    [SGActionView showGridMenuWithTitle:@"分享给好友"
+                             itemTitles:@[ @"短信",@"微博",@"微信",@"朋友圈" ]
+                                 images:@[ [UIImage imageNamed:@"share_sms_icon"],
+                                           [UIImage imageNamed:@"share_weibo_icon"],
+                                           [UIImage imageNamed:@"share_wechat_icon"],
+                                           [UIImage imageNamed:@"share_pengyouquan_icon"]]
+                         selectedHandle:^(NSInteger index) {
+                             NSLog(@"%d",index);
+                             switch (index) {
+                                 case 1:
+                                 {
+                                     //发送短信
+                                     MFMessageComposeViewController *controller=[[MFMessageComposeViewController alloc] init];
+                                     if([MFMessageComposeViewController canSendText])
+                                     {
+                                         //[controller setRecipients:[NSArray arrayWithObject:[item telephone]]];
+                                         [controller setBody:[[NSString alloc] initWithFormat:@"我正在使用iPin拼车，感觉非常好用，来和我一起使用，一起拼车出行吧！"]];
+                                         [controller setMessageComposeDelegate:self];
+                                         [self presentViewController:controller animated:YES completion:nil];
+                                         
+                                     }
+                                     break;
+                                 }
+                                 default:
+                                     break;
+                             }
+                         }];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    if(result==MessageComposeResultCancelled || result==MessageComposeResultSent)
+        [controller dismissViewControllerAnimated:YES completion:nil];
+    [self onShare];
 }
 @end

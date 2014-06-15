@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "iPinListTableViewCell.h"
 #import "iPinListItem.h"
 #import "RefreshHeaderAndFooterView.h"
 #import "iPinPublishViewController.h"
 #import "iPinNearbyViewController.h"
+#import "SGActionView.h"
 
-@interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate>
+@interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSMutableArray *listItem;
 }
@@ -34,5 +36,5 @@
 - (void)tapClose;
 - (void)onPublishButton;
 - (void)onNearbyButton;
-
+- (void)onShare;
 @end
