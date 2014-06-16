@@ -43,6 +43,12 @@
 		0022B3A1194B4B980093788E /* release_minus_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022B39F194B4B980093788E /* release_minus_button@2x.png */; };
 		0022B3A2194B4B980093788E /* release_plus_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022B3A0194B4B980093788E /* release_plus_button@2x.png */; };
 		0022B3A4194B4DFA0093788E /* Test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0022B3A3194B4DFA0093788E /* Test.xib */; };
+		0027A7A2194EC5B600771248 /* settings_back_action@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0027A79F194EC5B600771248 /* settings_back_action@2x.png */; };
+		0027A7A3194EC5B600771248 /* settings_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0027A7A0194EC5B600771248 /* settings_bg@2x.png */; };
+		0027A7A4194EC5B600771248 /* settings_logout_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0027A7A1194EC5B600771248 /* settings_logout_button@2x.png */; };
+		0027A7A6194EC5C000771248 /* settings_title_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0027A7A5194EC5C000771248 /* settings_title_bar@2x.png */; };
+		0027A7A9194EC60000771248 /* iPinSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0027A7A8194EC60000771248 /* iPinSettingViewController.m */; };
+		0027A7AF194ED1F200771248 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027A7AC194ED1F200771248 /* libWeChatSDK.a */; };
 		002CC48619497EAB002A812C /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 002CC48219497EAB002A812C /* blueArrow.png */; };
 		002CC48719497EAB002A812C /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 002CC48319497EAB002A812C /* blueArrow@2x.png */; };
 		002CC48A19497ECC002A812C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002CC48919497ECC002A812C /* QuartzCore.framework */; };
@@ -127,6 +133,15 @@
 		0022B39F194B4B980093788E /* release_minus_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release_minus_button@2x.png"; sourceTree = "<group>"; };
 		0022B3A0194B4B980093788E /* release_plus_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release_plus_button@2x.png"; sourceTree = "<group>"; };
 		0022B3A3194B4DFA0093788E /* Test.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test.xib; sourceTree = "<group>"; };
+		0027A79F194EC5B600771248 /* settings_back_action@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_back_action@2x.png"; sourceTree = "<group>"; };
+		0027A7A0194EC5B600771248 /* settings_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_bg@2x.png"; sourceTree = "<group>"; };
+		0027A7A1194EC5B600771248 /* settings_logout_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_logout_button@2x.png"; sourceTree = "<group>"; };
+		0027A7A5194EC5C000771248 /* settings_title_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_title_bar@2x.png"; sourceTree = "<group>"; };
+		0027A7A7194EC60000771248 /* iPinSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinSettingViewController.h; sourceTree = "<group>"; };
+		0027A7A8194EC60000771248 /* iPinSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinSettingViewController.m; sourceTree = "<group>"; };
+		0027A7AC194ED1F200771248 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		0027A7AD194ED1F200771248 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		0027A7AE194ED1F200771248 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		002CC48219497EAB002A812C /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		002CC48319497EAB002A812C /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
 		002CC48919497ECC002A812C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -169,6 +184,7 @@
 			files = (
 				00073BB2194DCB9B002ECE59 /* CFNetwork.framework in Frameworks */,
 				00071785194D919100F5CDF5 /* MessageUI.framework in Frameworks */,
+				0027A7AF194ED1F200771248 /* libWeChatSDK.a in Frameworks */,
 				002CC48A19497ECC002A812C /* QuartzCore.framework in Frameworks */,
 				00A5254B19487F0700450943 /* CoreGraphics.framework in Frameworks */,
 				00A5254F19487F0700450943 /* CoreData.framework in Frameworks */,
@@ -299,6 +315,7 @@
 				0022B396194B46BF0093788E /* TableCellImage */,
 				0022B398194B47360093788E /* PublishiViewImage */,
 				0004636E194D791C0052B91F /* NearbyViewImage */,
+				0027A79E194EC58A00771248 /* SettingViewImage */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -315,6 +332,35 @@
 				0022B3A0194B4B980093788E /* release_plus_button@2x.png */,
 			);
 			name = PublishiViewImage;
+			sourceTree = "<group>";
+		};
+		0027A79E194EC58A00771248 /* SettingViewImage */ = {
+			isa = PBXGroup;
+			children = (
+				0027A79F194EC5B600771248 /* settings_back_action@2x.png */,
+				0027A7A0194EC5B600771248 /* settings_bg@2x.png */,
+				0027A7A1194EC5B600771248 /* settings_logout_button@2x.png */,
+				0027A7A5194EC5C000771248 /* settings_title_bar@2x.png */,
+			);
+			name = SettingViewImage;
+			sourceTree = "<group>";
+		};
+		0027A7AA194ED1C300771248 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				0027A7AB194ED1E400771248 /* WeChat */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
+		0027A7AB194ED1E400771248 /* WeChat */ = {
+			isa = PBXGroup;
+			children = (
+				0027A7AC194ED1F200771248 /* libWeChatSDK.a */,
+				0027A7AD194ED1F200771248 /* WXApi.h */,
+				0027A7AE194ED1F200771248 /* WXApiObject.h */,
+			);
+			name = WeChat;
 			sourceTree = "<group>";
 		};
 		002CC48119497E88002A812C /* Refresh */ = {
@@ -374,16 +420,19 @@
 				004B218D194B310B006563E9 /* iPinPublishViewController.m */,
 				0004637B194D79D70052B91F /* iPinNearbyViewController.h */,
 				0004637C194D79D70052B91F /* iPinNearbyViewController.m */,
-				00E5B0EF19495214000740EA /* iPinListItem.h */,
-				00E5B0F019495214000740EA /* iPinListItem.m */,
-				00A5255F19487F0700450943 /* Images.xcassets */,
+				0027A7A7194EC60000771248 /* iPinSettingViewController.h */,
+				0027A7A8194EC60000771248 /* iPinSettingViewController.m */,
 				004AD0051948AC9D004149B9 /* iPinListTableViewCell.h */,
 				004AD0061948AC9D004149B9 /* iPinListTableViewCell.m */,
 				004AD0071948AC9D004149B9 /* iPinListTableViewCell.xib */,
+				00E5B0EF19495214000740EA /* iPinListItem.h */,
+				00E5B0F019495214000740EA /* iPinListItem.m */,
+				00A5255F19487F0700450943 /* Images.xcassets */,
 				00A5255C19487F0700450943 /* iPin.xcdatamodeld */,
 				002CC48119497E88002A812C /* Refresh */,
 				00071779194D8B0F00F5CDF5 /* SGActionView */,
 				00073BAA194DCB56002ECE59 /* AsyncSocket */,
+				0027A7AA194ED1C300771248 /* Share */,
 				0022B397194B46E80093788E /* Image */,
 				00A5255119487F0700450943 /* Supporting Files */,
 			);
@@ -501,9 +550,12 @@
 				0022B39C194B49600093788E /* release_information_bg2@2x.png in Resources */,
 				00A5255519487F0700450943 /* InfoPlist.strings in Resources */,
 				00046379194D796D0052B91F /* nearby_female_frame_2@2x.png in Resources */,
+				0027A7A4194EC5B600771248 /* settings_logout_button@2x.png in Resources */,
 				00046370194D79440052B91F /* nearby_title_bar@2x.png in Resources */,
 				00046376194D79610052B91F /* nearby_confirm_button@2x.png in Resources */,
+				0027A7A6194EC5C000771248 /* settings_title_bar@2x.png in Resources */,
 				00A5256019487F0700450943 /* Images.xcassets in Resources */,
+				0027A7A2194EC5B600771248 /* settings_back_action@2x.png in Resources */,
 				001B90E6194BF46B0082C0D1 /* personal_center_bg@2x.png in Resources */,
 				0022B39A194B49570093788E /* release_information_bg@2x.png in Resources */,
 				00046375194D79610052B91F /* nearby_bottom_bar@2x.png in Resources */,
@@ -515,6 +567,7 @@
 				00E5B0E91949454A000740EA /* information_frame_female@2x.png in Resources */,
 				0022B3A1194B4B980093788E /* release_minus_button@2x.png in Resources */,
 				001602F419488DAE00CA8EDD /* settings_button@2X.png in Resources */,
+				0027A7A3194EC5B600771248 /* settings_bg@2x.png in Resources */,
 				00046374194D79610052B91F /* nearby_back_function@2x.png in Resources */,
 				004ACFFE1948AC17004149B9 /* background@2x.png in Resources */,
 				0022B394194B446D0093788E /* back_function@2x.png in Resources */,
@@ -551,6 +604,7 @@
 				004AD0081948AC9D004149B9 /* iPinListTableViewCell.m in Sources */,
 				008911A61949CDF800875753 /* RefreshHeaderAndFooterView.m in Sources */,
 				00A5255E19487F0700450943 /* iPin.xcdatamodeld in Sources */,
+				0027A7A9194EC60000771248 /* iPinSettingViewController.m in Sources */,
 				00A5255B19487F0700450943 /* iPinAppDelegate.m in Sources */,
 				00073BAF194DCB6D002ECE59 /* AsyncSocket.m in Sources */,
 				004B218E194B310B006563E9 /* iPinPublishViewController.m in Sources */,
@@ -682,6 +736,10 @@
 				GCC_PREFIX_HEADER = "iPin/iPin-Prefix.pch";
 				INFOPLIST_FILE = "iPin/iPin-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iPin",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -696,6 +754,10 @@
 				GCC_PREFIX_HEADER = "iPin/iPin-Prefix.pch";
 				INFOPLIST_FILE = "iPin/iPin-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iPin",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

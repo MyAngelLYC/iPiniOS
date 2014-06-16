@@ -13,6 +13,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize mSocket;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -24,6 +25,13 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     //设置进程睡眠，以保证LaunchImage的显示时间
+    /*
+    [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
+    [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
+    NSData *tmpData=[@"VersionChech" dataUsingEncoding:NSUTF8StringEncoding];
+    [mSocket writeData:tmpData withTimeout:-1 tag:0];
+    [mSocket readDataWithTimeout:-1 tag:0];
+     */
     [NSThread sleepForTimeInterval:1.5];
     return YES;
 }
@@ -151,4 +159,13 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+/*
+- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    UIAlertView *myAlert=[[UIAlertView alloc] initWithTitle:@"版本更新" message:str delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",  nil];
+    [myAlert show];
+    [[self mSocket] disconnect];
+    [self setMSocket:nil];
+}*/
 @end

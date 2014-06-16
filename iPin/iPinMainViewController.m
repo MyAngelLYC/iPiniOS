@@ -26,6 +26,7 @@
 @synthesize mainViewCenter;
 @synthesize isMainView;
 @synthesize mSocket;
+@synthesize mReceivedInfoCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,8 +64,12 @@
     UIButton *shareButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [shareButton setFrame:CGRectMake(0, 193, 280, 42)];
     [shareButton addTarget:self action:@selector(onShare) forControlEvents:UIControlEventTouchUpInside];
-    //[shareButton setBackgroundColor:[UIColor whiteColor]];
+    UIButton *settingButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [settingButton setFrame:CGRectMake(0, 238, 280, 40)];
+    [settingButton addTarget:self action:@selector(onSetting) forControlEvents:UIControlEventTouchUpInside];
+    //[settingButton setBackgroundColor:[UIColor whiteColor]];
     [mInfoView addSubview:shareButton];
+    [mInfoView addSubview:settingButton];
 
     
     UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 43)];
@@ -97,12 +102,14 @@
     UITableView *listTable=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 360) style:UITableViewStylePlain];
     [listTable setDelegate:self];
     [listTable setDataSource:self];
+    [listTable setScrollEnabled:NO];
     UINib *nib=[UINib nibWithNibName:@"iPinListTableViewCell" bundle:nil];
     [listTable registerNib:nib forCellReuseIdentifier:@"iPinListTableViewCell"];
     [self setMyTableView:listTable];
     
     UIScrollView *scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 43, 320, 360)];
-    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height*2)];
+    [scrollView setContentSize:CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height+1)];
+    [scrollView setBackgroundColor:[UIColor whiteColor]];
     [scrollView setDelegate:self];
     //[scrollView addSubview:listTable];
     [self setMyScrollView:scrollView];
@@ -112,9 +119,7 @@
     [self.refreshHeaderAndFooterView.refreshHeaderView updateRefreshDate:[NSDate date]];
     [[self mainView] addSubview:scrollView];
     [myScrollView addSubview:view];
-    [view addSubview:listTable];
-    
-    
+    [myScrollView addSubview:listTable];
     
     if([self mSocket])
     {
@@ -125,16 +130,13 @@
     {
         [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
         [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
-        
+        NSData *tmpData=[@"InfoListRefresh 0 10" dataUsingEncoding:NSUTF8StringEncoding];
+        [mSocket writeData:tmpData withTimeout:-1 tag:0];
+        [mSocket readDataWithTimeout:-1 tag:0];
+        [self setMReceivedInfoCount:0];
     }
     
     listItem=[[NSMutableArray alloc] init];
-    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"ussam" sex:@"男" telephone:@"15105178519" fromPlace:@"东大西门" toPlace:@"百家湖" date:@"2014-6-9" detail:@"只限妹子" seats:@"1"]];
-    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
-    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
-    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
-    [listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
-    //[listItem addObject:[[iPinListItem alloc] initWithUsername:@"lyc" sex:@"女" telephone:@"15105178519" fromPlace:@"东大东门" toPlace:@"禄口机场" date:@"2014-5-30" detail:@"我要回家" seats:@"3"]];
 
 }
 
@@ -146,27 +148,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    int count=[listItem count];
-    iPinListTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"iPinListTableViewCell"];
-    float height=[[cell contentView] bounds].size.height;
-    if(height*count>360)
-    {
-        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, height*count+8)];
-        [myTableView setFrame:CGRectMake(0, 0, 320, height*count+8)];
-    }
-    else
-    {
-        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, 360+1)];
-        [myTableView setFrame:CGRectMake(0, 0, 320, 360+1)];
-    }
-    
-    [refreshHeaderAndFooterView removeFromSuperview];
-    RefreshHeaderAndFooterView *view = [[RefreshHeaderAndFooterView alloc] initWithFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
-    view.delegate = self;
-    [myScrollView addSubview:view];
-    self.refreshHeaderAndFooterView = view;
-    [view addSubview:myTableView];
     return [listItem count];
 
 }
@@ -189,9 +170,43 @@
     int clickItem=[indexPath row];
     iPinListItem *item=[listItem objectAtIndex:clickItem];
     NSString *msg=[[NSString alloc] initWithFormat:@"用户：%@\n性别：%@\n电话：%@\n出发：%@\n前往：%@\n日期：%@\n详情：%@",[item username],[item sex],[item telephone],[item fromPlace],[item toPlace],[item date],[item detail]];
-    UIAlertView *myAlert=[[UIAlertView alloc] initWithTitle:@"拼车信息" message:msg delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"打电话",  nil];
-    [myAlert addButtonWithTitle:@"发短信"];
-    [myAlert show];
+    //UIAlertView *myAlert=[[UIAlertView alloc] initWithTitle:@"拼车信息" message:msg delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"打电话",  nil];
+    //[myAlert addButtonWithTitle:@"发短信"];
+    //[myAlert show];
+    [SGActionView showAlertWithTitle:@"拼车详情"
+                             message:msg
+                     leftButtonTitle:@"打电话"
+                    rightButtonTitle:@"发短信"
+                      selectedHandle:^(NSInteger index) {
+                          NSLog(@"%d",index);
+                          switch (index) {
+                              case 0:
+                              {
+                                  //打电话
+                                  NSString *str=[[NSString alloc] initWithFormat:@"tel://%@",[item telephone]];
+                                  UIWebView *callView=[[UIWebView alloc] init];
+                                  [callView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+                                  [[self view] addSubview:callView];
+                                  break;
+                              }
+                              case 1:
+                              {
+                                  //发送短信
+                                  MFMessageComposeViewController *controller=[[MFMessageComposeViewController alloc] init];
+                                  if([MFMessageComposeViewController canSendText])
+                                  {
+                                      [controller setRecipients:[NSArray arrayWithObject:[item telephone]]];
+                                      [controller setBody:[[NSString alloc] initWithFormat:@"同学您好，我通过iPin拼车看到您预定%@从%@出发，前往%@，我和您有相同或相近目的地，想和您一起拼车，可以吗？",[item date],[item fromPlace],[item toPlace]]];
+                                      [controller setMessageComposeDelegate:self];
+                                      [self presentViewController:controller animated:YES completion:nil];
+                                      
+                                  }
+                                  break;
+                              }
+                              default:
+                                  break;
+                          }
+                      }];
 }
 /*
 #pragma mark - Navigation
@@ -214,13 +229,14 @@
 #pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-
-    [self.refreshHeaderAndFooterView RefreshScrollViewDidScroll:scrollView];
+    //if(![scrollView isKindOfClass:[UITableView class]])
+        [self.refreshHeaderAndFooterView RefreshScrollViewDidScroll:scrollView];
     
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [self.refreshHeaderAndFooterView RefreshScrollViewDidEndDragging:scrollView];
+    //if(![scrollView isKindOfClass:[UITableView class]])
+        [self.refreshHeaderAndFooterView RefreshScrollViewDidEndDragging:scrollView];
 	
 }
 #pragma mark -
@@ -229,11 +245,28 @@
 - (void)RefreshHeaderAndFooterDidTriggerRefresh:(RefreshHeaderAndFooterView*)view{
 	self.reloading = YES;
     if (view.refreshHeaderView.state == PullRefreshLoading) {//下拉刷新动作的内容
-        NSLog(@"header");
+        //NSLog(@"header");
+        [listItem removeAllObjects];
+        [self setMReceivedInfoCount:0];
+        [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
+        [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
+        NSData *tmpData=[[NSString stringWithFormat:@"InfoListRefresh %d 10",[self mReceivedInfoCount]] dataUsingEncoding:NSUTF8StringEncoding];
+        [mSocket writeData:tmpData withTimeout:-1 tag:0];
+        [mSocket readDataWithTimeout:-1 tag:0];
+        [self setMReceivedInfoCount:0];
+        
         [self performSelector:@selector(doneLoadingViewData) withObject:nil afterDelay:3.0];
         
     }else if(view.refreshFooterView.state == PullRefreshLoading){//上拉加载更多动作的内容
-        NSLog(@"footer");
+        //NSLog(@"footer");
+        
+        [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
+        [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
+        NSData *tmpData=[[NSString stringWithFormat:@"InfoListRefresh %d 10",[self mReceivedInfoCount]] dataUsingEncoding:NSUTF8StringEncoding];
+        [mSocket writeData:tmpData withTimeout:-1 tag:0];
+        [mSocket readDataWithTimeout:-1 tag:0];
+        [self setMReceivedInfoCount:0];
+        
         [self performSelector:@selector(doneLoadingViewData) withObject:nil afterDelay:3.0];
     }
 }
@@ -389,10 +422,58 @@
                          }];
 }
 
+- (void)onSetting
+{
+    [self presentViewController:[[iPinSettingViewController alloc] init] animated:YES completion:nil];
+}
+
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
     if(result==MessageComposeResultCancelled || result==MessageComposeResultSent)
         [controller dismissViewControllerAnimated:YES completion:nil];
-    [self onShare];
+    //[self onShare];
+}
+
+- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSArray *tempStr=[str componentsSeparatedByString:@"`"];
+    for(NSInteger i=0;i<[[tempStr objectAtIndex:0] intValue];i++)
+    {
+        [listItem addObject:[[iPinListItem alloc] initWithUsername:[tempStr objectAtIndex:(11*i+4)] sex:@"男" telephone:@"12345678901" fromPlace:[tempStr objectAtIndex:(11*i+5)] toPlace:[tempStr objectAtIndex:(11*i+6)] date:[tempStr objectAtIndex:(11*i+7)] detail:[tempStr objectAtIndex:(11*i+8)] seats:[NSString stringWithFormat:@"%d",(4-[[tempStr objectAtIndex:(11*i+10)] intValue])]]];
+    }
+    //[[self myTableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    
+    [self setMReceivedInfoCount:[listItem count]];
+    NSLog(@"Received Info Count:%d",[self mReceivedInfoCount]);
+    [mSocket disconnect];
+    [self setMSocket:nil];
+    
+    iPinListTableViewCell *cell=[myTableView dequeueReusableCellWithIdentifier:@"iPinListTableViewCell"];
+    float height=[self mReceivedInfoCount]*[cell frame].size.height;
+    //float height=[self mReceivedInfoCount]*88;
+    if(height>360)
+    {
+        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, height+8)];
+        [myTableView setFrame:CGRectMake(0, 0, 320, height+8)];
+    }
+    else
+    {
+        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, 360+1)];
+        [myTableView setFrame:CGRectMake(0, 0, 320, 360+1)];
+    }
+    //[refreshHeaderAndFooterView setFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
+    //[refreshHeaderAndFooterView layoutSubviews];
+    
+    [refreshHeaderAndFooterView removeFromSuperview];
+    [self setRefreshHeaderAndFooterView:nil];
+    RefreshHeaderAndFooterView *view = [[RefreshHeaderAndFooterView alloc] initWithFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
+    view.delegate = self;
+    [myScrollView addSubview:view];
+    self.refreshHeaderAndFooterView = view;
+    //[myScrollView addSubview:myTableView];
+    [myScrollView bringSubviewToFront:myTableView];
+    
+    [[self myTableView] reloadData];
 }
 @end

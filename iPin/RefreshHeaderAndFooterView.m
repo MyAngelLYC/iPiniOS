@@ -195,7 +195,7 @@
         // Initialization code
         
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
 		
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
 		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;

@@ -13,6 +13,7 @@
 #import "RefreshHeaderAndFooterView.h"
 #import "iPinPublishViewController.h"
 #import "iPinNearbyViewController.h"
+#import "iPinSettingViewController.h"
 #import "SGActionView.h"
 #import "AsyncSocket.h"
 
@@ -21,7 +22,7 @@
     NSMutableArray *listItem;
 }
 
-@property(nonatomic,strong)RefreshHeaderAndFooterView * refreshHeaderAndFooterView;
+@property(nonatomic,weak)RefreshHeaderAndFooterView * refreshHeaderAndFooterView;
 @property(nonatomic,assign)BOOL reloading;
 @property(nonatomic,weak)UIScrollView *myScrollView;
 @property(nonatomic,strong)UITableView *myTableView;
@@ -33,10 +34,13 @@
 @property(nonatomic)CGPoint mainViewCenter;
 @property(nonatomic)BOOL isMainView;
 @property(nonatomic,strong)AsyncSocket *mSocket;
+@property(nonatomic)NSInteger mReceivedInfoCount;
 
 - (void)onMyInfoButton;
 - (void)tapClose;
 - (void)onPublishButton;
 - (void)onNearbyButton;
 - (void)onShare;
+- (void)onSetting;
+
 @end
