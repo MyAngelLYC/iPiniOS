@@ -15,9 +15,9 @@
 #import "iPinNearbyViewController.h"
 #import "iPinSettingViewController.h"
 #import "SGActionView.h"
-#import "AsyncSocket.h"
+#import "iPinShareCenter.h"
 
-@interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate,MFMessageComposeViewControllerDelegate,AsyncSocketDelegate>
+@interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSMutableArray *listItem;
 }
@@ -33,7 +33,6 @@
 @property(nonatomic,strong)UIGestureRecognizer *panGesture;
 @property(nonatomic)CGPoint mainViewCenter;
 @property(nonatomic)BOOL isMainView;
-@property(nonatomic,strong)AsyncSocket *mSocket;
 @property(nonatomic)NSInteger mReceivedInfoCount;
 
 - (void)onMyInfoButton;

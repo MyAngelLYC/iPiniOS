@@ -25,7 +25,6 @@
 @synthesize panGesture;
 @synthesize mainViewCenter;
 @synthesize isMainView;
-@synthesize mSocket;
 @synthesize mReceivedInfoCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -121,20 +120,6 @@
     [myScrollView addSubview:view];
     [myScrollView addSubview:listTable];
     
-    if([self mSocket])
-    {
-        [[self mSocket] disconnect];
-        [self setMSocket:nil];
-    }
-    else
-    {
-        [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
-        [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
-        NSData *tmpData=[@"InfoListRefresh 0 10" dataUsingEncoding:NSUTF8StringEncoding];
-        [mSocket writeData:tmpData withTimeout:-1 tag:0];
-        [mSocket readDataWithTimeout:-1 tag:0];
-        [self setMReceivedInfoCount:0];
-    }
     
     listItem=[[NSMutableArray alloc] init];
 
@@ -246,26 +231,14 @@
 	self.reloading = YES;
     if (view.refreshHeaderView.state == PullRefreshLoading) {//下拉刷新动作的内容
         //NSLog(@"header");
-        [listItem removeAllObjects];
-        [self setMReceivedInfoCount:0];
-        [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
-        [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
-        NSData *tmpData=[[NSString stringWithFormat:@"InfoListRefresh %d 10",[self mReceivedInfoCount]] dataUsingEncoding:NSUTF8StringEncoding];
-        [mSocket writeData:tmpData withTimeout:-1 tag:0];
-        [mSocket readDataWithTimeout:-1 tag:0];
-        [self setMReceivedInfoCount:0];
+        
         
         [self performSelector:@selector(doneLoadingViewData) withObject:nil afterDelay:3.0];
         
     }else if(view.refreshFooterView.state == PullRefreshLoading){//上拉加载更多动作的内容
         //NSLog(@"footer");
         
-        [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
-        [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
-        NSData *tmpData=[[NSString stringWithFormat:@"InfoListRefresh %d 10",[self mReceivedInfoCount]] dataUsingEncoding:NSUTF8StringEncoding];
-        [mSocket writeData:tmpData withTimeout:-1 tag:0];
-        [mSocket readDataWithTimeout:-1 tag:0];
-        [self setMReceivedInfoCount:0];
+        //[self setMReceivedInfoCount:0];
         
         [self performSelector:@selector(doneLoadingViewData) withObject:nil afterDelay:3.0];
     }
@@ -409,11 +382,13 @@
                                  case 3:
                                  {
                                      NSLog(@"微信");
+                                     [[iPinShareCenter sharedInstance] weChatShare];
                                      break;
                                  }
                                  case 4:
                                  {
                                      NSLog(@"朋友圈");
+                                     [[iPinShareCenter sharedInstance] weChatFriendsShare];
                                      break;
                                  }
                                  default:
@@ -434,46 +409,7 @@
     //[self onShare];
 }
 
-- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
-{
-    NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSArray *tempStr=[str componentsSeparatedByString:@"`"];
-    for(NSInteger i=0;i<[[tempStr objectAtIndex:0] intValue];i++)
-    {
-        [listItem addObject:[[iPinListItem alloc] initWithUsername:[tempStr objectAtIndex:(11*i+4)] sex:@"男" telephone:@"12345678901" fromPlace:[tempStr objectAtIndex:(11*i+5)] toPlace:[tempStr objectAtIndex:(11*i+6)] date:[tempStr objectAtIndex:(11*i+7)] detail:[tempStr objectAtIndex:(11*i+8)] seats:[NSString stringWithFormat:@"%d",(4-[[tempStr objectAtIndex:(11*i+10)] intValue])]]];
-    }
-    //[[self myTableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-    
-    [self setMReceivedInfoCount:[listItem count]];
-    NSLog(@"Received Info Count:%d",[self mReceivedInfoCount]);
-    [mSocket disconnect];
-    [self setMSocket:nil];
-    
-    iPinListTableViewCell *cell=[myTableView dequeueReusableCellWithIdentifier:@"iPinListTableViewCell"];
-    float height=[self mReceivedInfoCount]*[cell frame].size.height;
-    //float height=[self mReceivedInfoCount]*88;
-    if(height>360)
-    {
-        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, height+8)];
-        [myTableView setFrame:CGRectMake(0, 0, 320, height+8)];
-    }
-    else
-    {
-        [myScrollView setContentSize:CGSizeMake(myScrollView.bounds.size.width, 360+1)];
-        [myTableView setFrame:CGRectMake(0, 0, 320, 360+1)];
-    }
-    //[refreshHeaderAndFooterView setFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
-    //[refreshHeaderAndFooterView layoutSubviews];
-    
-    [refreshHeaderAndFooterView removeFromSuperview];
-    [self setRefreshHeaderAndFooterView:nil];
-    RefreshHeaderAndFooterView *view = [[RefreshHeaderAndFooterView alloc] initWithFrame:CGRectMake(0, 0, myScrollView.frame.size.width, myScrollView.contentSize.height)];
-    view.delegate = self;
-    [myScrollView addSubview:view];
-    self.refreshHeaderAndFooterView = view;
-    //[myScrollView addSubview:myTableView];
-    [myScrollView bringSubviewToFront:myTableView];
-    
-    [[self myTableView] reloadData];
-}
+
+
+
 @end

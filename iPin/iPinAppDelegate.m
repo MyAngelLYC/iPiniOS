@@ -13,26 +13,26 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize mSocket;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //启动后显示状态条
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window setRootViewController:[[iPinMainViewController alloc] init]];
+    [self.window setRootViewController:[[iPinLoginViewController alloc] init]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     //设置进程睡眠，以保证LaunchImage的显示时间
-    /*
-    [self setMSocket:[[AsyncSocket alloc] initWithDelegate:self]];
-    [[self mSocket] connectToHost:@"www.ipinstudio.tk" onPort:20000 error:nil];
-    NSData *tmpData=[@"VersionChech" dataUsingEncoding:NSUTF8StringEncoding];
-    [mSocket writeData:tmpData withTimeout:-1 tag:0];
-    [mSocket readDataWithTimeout:-1 tag:0];
-     */
-    [NSThread sleepForTimeInterval:1.5];
+    
+    NSMutableDictionary *sendJSON=[[NSMutableDictionary alloc] init];
+    [sendJSON setObject:@"VersionCheck" forKey:@"cmd"];
+    NSMutableDictionary *backJSON=[[iPinRequestCenter sharedInstance] sendRequest:sendJSON];
+    if(backJSON!=nil)
+        NSLog(@"%@",[backJSON objectForKey:@"version"]);
+    [[iPinShareCenter sharedInstance] registerApp];
+    //[NSThread sleepForTimeInterval:1.5];
     return YES;
 }
 
@@ -159,13 +159,13 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-/*
-- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    UIAlertView *myAlert=[[UIAlertView alloc] initWithTitle:@"版本更新" message:str delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",  nil];
-    [myAlert show];
-    [[self mSocket] disconnect];
-    [self setMSocket:nil];
-}*/
+    return [[iPinShareCenter sharedInstance] handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [[iPinShareCenter sharedInstance] handleOpenURL:url];
+}
 @end

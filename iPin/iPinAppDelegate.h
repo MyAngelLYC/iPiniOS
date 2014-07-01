@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "iPinMainViewController.h"
-#import "AsyncSocket.h"
+#import "iPinLoginViewController.h"
+#import "iPinShareCenter.h"
+#import "iPinRequestCenter.h"
 
-@interface iPinAppDelegate : UIResponder <UIApplicationDelegate,AsyncSocketDelegate>
+@interface iPinAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, strong) AsyncSocket *mSocket;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
