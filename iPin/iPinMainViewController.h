@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "iPinLoginViewController.h"
 #import "iPinListTableViewCell.h"
 #import "iPinListItem.h"
 #import "RefreshHeaderAndFooterView.h"

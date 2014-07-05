@@ -35,6 +35,8 @@
 		0020F71519628D450067B896 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0020F71419628D450067B896 /* LaunchImage@2x.png */; };
 		0020F718196291AB0067B896 /* iPinLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0020F717196291AB0067B896 /* iPinLoginViewController.m */; };
 		0020F71B196292F80067B896 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0020F71A196292F80067B896 /* Logo@2x.png */; };
+		0020F71D1966FE790067B896 /* Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0020F71C1966FE790067B896 /* Button@2x.png */; };
+		0020F720196705D90067B896 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0020F71F196705D90067B896 /* BaseViewController.m */; };
 		0022B392194B44050093788E /* release_title_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022B391194B44050093788E /* release_title_bar@2x.png */; };
 		0022B394194B446D0093788E /* back_function@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022B393194B446D0093788E /* back_function@2x.png */; };
 		0022B39A194B49570093788E /* release_information_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022B399194B49570093788E /* release_information_bg@2x.png */; };
@@ -120,12 +122,16 @@
 		001602F219488DAE00CA8EDD /* settings_button@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_button@2X.png"; sourceTree = "<group>"; };
 		001602F919488E9F00CA8EDD /* iPinMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinMainViewController.h; sourceTree = "<group>"; };
 		001602FA19488E9F00CA8EDD /* iPinMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinMainViewController.m; sourceTree = "<group>"; };
+		001AB47F1967A0A8002B729A /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		001B90E5194BF46B0082C0D1 /* personal_center_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "personal_center_bg@2x.png"; sourceTree = "<group>"; };
 		001B90E7194BF47D0082C0D1 /* release_confirm_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release_confirm_button@2x.png"; sourceTree = "<group>"; };
 		0020F71419628D450067B896 /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
 		0020F716196291AB0067B896 /* iPinLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinLoginViewController.h; sourceTree = "<group>"; };
 		0020F717196291AB0067B896 /* iPinLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinLoginViewController.m; sourceTree = "<group>"; };
 		0020F71A196292F80067B896 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
+		0020F71C1966FE790067B896 /* Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button@2x.png"; sourceTree = "<group>"; };
+		0020F71E196705D90067B896 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		0020F71F196705D90067B896 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		0022B391194B44050093788E /* release_title_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release_title_bar@2x.png"; sourceTree = "<group>"; };
 		0022B393194B446D0093788E /* back_function@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_function@2x.png"; sourceTree = "<group>"; };
 		0022B399194B49570093788E /* release_information_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release_information_bg@2x.png"; sourceTree = "<group>"; };
@@ -282,8 +288,18 @@
 			isa = PBXGroup;
 			children = (
 				0020F71A196292F80067B896 /* Logo@2x.png */,
+				0020F71C1966FE790067B896 /* Button@2x.png */,
 			);
 			name = LoginViewImage;
+			sourceTree = "<group>";
+		};
+		0020F721196705EB0067B896 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0020F71E196705D90067B896 /* BaseViewController.h */,
+				0020F71F196705D90067B896 /* BaseViewController.m */,
+			);
+			name = BaseViewController;
 			sourceTree = "<group>";
 		};
 		0022B395194B46870093788E /* MainViewImage */ = {
@@ -411,6 +427,7 @@
 		00A5254719487F0700450943 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				001AB47F1967A0A8002B729A /* libcommonCrypto.dylib */,
 				00073BB1194DCB9B002ECE59 /* CFNetwork.framework */,
 				00071784194D919100F5CDF5 /* MessageUI.framework */,
 				002CC48919497ECC002A812C /* QuartzCore.framework */,
@@ -445,10 +462,11 @@
 				00E5B0F019495214000740EA /* iPinListItem.m */,
 				00A5255F19487F0700450943 /* Images.xcassets */,
 				00A5255C19487F0700450943 /* iPin.xcdatamodeld */,
+				0020F721196705EB0067B896 /* BaseViewController */,
+				0090437C19625BE30057CECF /* RequestCenter */,
 				002CC48119497E88002A812C /* Refresh */,
 				00071779194D8B0F00F5CDF5 /* SGActionView */,
 				0027A7AA194ED1C300771248 /* Share */,
-				0090437C19625BE30057CECF /* RequestCenter */,
 				0022B397194B46E80093788E /* Image */,
 				00A5255119487F0700450943 /* Supporting Files */,
 			);
@@ -594,6 +612,7 @@
 				002CC48619497EAB002A812C /* blueArrow.png in Resources */,
 				001602F319488DAE00CA8EDD /* release_function@2X.png in Resources */,
 				0004637A194D796D0052B91F /* nearby_male_frame_2@2x.png in Resources */,
+				0020F71D1966FE790067B896 /* Button@2x.png in Resources */,
 				0090437919624F150057CECF /* Icon@2x.png in Resources */,
 				00E5B0EA1949454A000740EA /* information_frame_male@2x.png in Resources */,
 				00071782194D8DBD00F5CDF5 /* share_wechat_icon@2x.png in Resources */,
@@ -616,6 +635,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0020F720196705D90067B896 /* BaseViewController.m in Sources */,
 				00071773194D8AED00F5CDF5 /* SGActionView.m in Sources */,
 				00071774194D8AED00F5CDF5 /* SGBaseMenu.m in Sources */,
 				0027A7B2194EDCDC00771248 /* iPinShareCenter.m in Sources */,
@@ -757,6 +777,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iPin",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -775,6 +796,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iPin",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

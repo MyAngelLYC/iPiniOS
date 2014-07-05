@@ -10,6 +10,7 @@
 
 @interface iPinRequestCenter : NSObject
 
-+(iPinRequestCenter *)sharedInstance;
--(NSMutableDictionary *)sendRequest:(NSMutableDictionary *)sendJSON;
++ (iPinRequestCenter *)sharedInstance;
+- (NSMutableDictionary *)sendRequest:(NSMutableDictionary *)sendJSON;
+- (NSString *)md5:(NSString *)str;
 @end

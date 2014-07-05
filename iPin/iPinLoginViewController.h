@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CommonCrypto/CommonDigest.h>
+#import "BaseViewController.h"
+#import "iPinRequestCenter.h"
 
-@interface iPinLoginViewController : UIViewController
+@interface iPinLoginViewController : BaseViewController
+{
+    UITextField *mUsernameTextField;
+    UITextField *mPasswordTextField;
+}
 
+- (void)onLoginButton;
+- (void)onRegisterButton;
 @end
