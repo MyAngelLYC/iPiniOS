@@ -106,6 +106,15 @@
     if(backJSON!=nil)
     {
         NSLog(@"%@",[backJSON objectForKey:@"result"]);
+        if(1==(NSInteger)[backJSON objectForKey:@"result"])
+        {
+            
+        }
+        else
+        {
+            UIAlertView *myAlert=[[UIAlertView alloc] initWithTitle:@"信息提示" message:@"用户名或密码错误" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil,  nil];
+            [myAlert show];
+        }
     }
     else
     {
