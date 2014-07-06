@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import "iPinRequestCenter.h"
+#import "iPinDatabaseCenter.h"
 
 @interface iPinLoginViewController : BaseViewController
 {

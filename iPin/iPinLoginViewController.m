@@ -111,6 +111,15 @@
         NSInteger result=[(NSNumber *)[backJSON objectForKey:@"result"] intValue];
         if(result==1)
         {
+            [[iPinDatabaseCenter sharedInstance] openDatabase];
+            sqlite3 *database=[[iPinDatabaseCenter sharedInstance] getDatabase];
+            char *errorMsg;
+            const char *createSql="create table if not exists loginUser (name text)";
+            if (sqlite3_exec(database, createSql, NULL, NULL, &errorMsg)==SQLITE_OK) {
+                NSLog(@"create ok.");   
+            }
+            sqlite3_free(errorMsg);
+            [[iPinDatabaseCenter sharedInstance] closeDatabase];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else

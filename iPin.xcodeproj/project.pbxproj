@@ -25,6 +25,8 @@
 		00071783194D8DBD00F5CDF5 /* share_weibo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0007177F194D8DBD00F5CDF5 /* share_weibo_icon@2x.png */; };
 		00071785194D919100F5CDF5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00071784194D919100F5CDF5 /* MessageUI.framework */; };
 		00073BB2194DCB9B002ECE59 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00073BB1194DCB9B002ECE59 /* CFNetwork.framework */; };
+		000780DD196997A900A0E70E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 000780DB1969960600A0E70E /* libsqlite3.0.dylib */; };
+		000780E119699A7E00A0E70E /* iPinDatabaseCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 000780E019699A7E00A0E70E /* iPinDatabaseCenter.m */; };
 		001602EE19488D8D00CA8EDD /* title_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602ED19488D8D00CA8EDD /* title_bar@2x.png */; };
 		001602F019488DA300CA8EDD /* nearby_function@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602EF19488DA300CA8EDD /* nearby_function@2x.png */; };
 		001602F319488DAE00CA8EDD /* release_function@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 001602F119488DAE00CA8EDD /* release_function@2X.png */; };
@@ -116,6 +118,9 @@
 		0007177F194D8DBD00F5CDF5 /* share_weibo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_weibo_icon@2x.png"; sourceTree = "<group>"; };
 		00071784194D919100F5CDF5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		00073BB1194DCB9B002ECE59 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		000780DB1969960600A0E70E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		000780DF19699A7E00A0E70E /* iPinDatabaseCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinDatabaseCenter.h; sourceTree = "<group>"; };
+		000780E019699A7E00A0E70E /* iPinDatabaseCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinDatabaseCenter.m; sourceTree = "<group>"; };
 		001602ED19488D8D00CA8EDD /* title_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_bar@2x.png"; sourceTree = "<group>"; };
 		001602EF19488DA300CA8EDD /* nearby_function@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nearby_function@2x.png"; sourceTree = "<group>"; };
 		001602F119488DAE00CA8EDD /* release_function@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release_function@2X.png"; sourceTree = "<group>"; };
@@ -193,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				000780DD196997A900A0E70E /* libsqlite3.0.dylib in Frameworks */,
 				00073BB2194DCB9B002ECE59 /* CFNetwork.framework in Frameworks */,
 				00071785194D919100F5CDF5 /* MessageUI.framework in Frameworks */,
 				0027A7AF194ED1F200771248 /* libWeChatSDK.a in Frameworks */,
@@ -265,6 +271,15 @@
 				0007177F194D8DBD00F5CDF5 /* share_weibo_icon@2x.png */,
 			);
 			name = ShareViewImage;
+			sourceTree = "<group>";
+		};
+		000780DE19699A4B00A0E70E /* DatabaseCenter */ = {
+			isa = PBXGroup;
+			children = (
+				000780DF19699A7E00A0E70E /* iPinDatabaseCenter.h */,
+				000780E019699A7E00A0E70E /* iPinDatabaseCenter.m */,
+			);
+			name = DatabaseCenter;
 			sourceTree = "<group>";
 		};
 		001602EC19488D7700CA8EDD /* AppImage */ = {
@@ -427,6 +442,7 @@
 		00A5254719487F0700450943 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				000780DB1969960600A0E70E /* libsqlite3.0.dylib */,
 				001AB47F1967A0A8002B729A /* libcommonCrypto.dylib */,
 				00073BB1194DCB9B002ECE59 /* CFNetwork.framework */,
 				00071784194D919100F5CDF5 /* MessageUI.framework */,
@@ -464,6 +480,7 @@
 				00A5255C19487F0700450943 /* iPin.xcdatamodeld */,
 				0020F721196705EB0067B896 /* BaseViewController */,
 				0090437C19625BE30057CECF /* RequestCenter */,
+				000780DE19699A4B00A0E70E /* DatabaseCenter */,
 				002CC48119497E88002A812C /* Refresh */,
 				00071779194D8B0F00F5CDF5 /* SGActionView */,
 				0027A7AA194ED1C300771248 /* Share */,
@@ -652,6 +669,7 @@
 				00A5255719487F0700450943 /* main.m in Sources */,
 				00E5B0F119495214000740EA /* iPinListItem.m in Sources */,
 				001602FB19488E9F00CA8EDD /* iPinMainViewController.m in Sources */,
+				000780E119699A7E00A0E70E /* iPinDatabaseCenter.m in Sources */,
 				0020F718196291AB0067B896 /* iPinLoginViewController.m in Sources */,
 				00071775194D8AED00F5CDF5 /* SGAlertMenu.m in Sources */,
 			);
