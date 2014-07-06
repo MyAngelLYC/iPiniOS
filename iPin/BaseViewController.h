@@ -11,7 +11,9 @@
 @interface BaseViewController : UIViewController <UITextFieldDelegate>
 {
     UITextField *mTextField;
+    UIGestureRecognizer *mTapGesture;
 }
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
+- (void)onTapClose;
 @end

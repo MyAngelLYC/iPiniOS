@@ -39,7 +39,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self presentViewController:[[iPinLoginViewController alloc] init] animated:YES completion:nil];
     // Do any additional setup after loading the view.
     UIView *mMainView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
     UIView *mInfoView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
@@ -123,7 +122,13 @@
     
     
     listItem=[[NSMutableArray alloc] init];
+    
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self presentViewController:[[iPinLoginViewController alloc] init] animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

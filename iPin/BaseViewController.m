@@ -36,12 +36,32 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
 #endif
+    mTapGesture=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapClose)];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    mTextField=textField;
+    [[self view] addGestureRecognizer:mTapGesture];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    mTextField=textField;
+    [[self view] removeGestureRecognizer:mTapGesture];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    mTextField=textField;
+    [mTextField resignFirstResponder];
+    return YES;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -83,6 +103,11 @@
     [UIView setAnimationDuration:animationDuration];
     self.view.frame=[[UIScreen mainScreen] applicationFrame];
     [UIView commitAnimations];
+}
+
+- (void)onTapClose
+{
+    [mTextField resignFirstResponder];
 }
 /*
 #pragma mark - Navigation

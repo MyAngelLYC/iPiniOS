@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[self view] setBackgroundColor:[UIColor whiteColor]];
+    
     CGRect viewBounds=[[UIScreen mainScreen]applicationFrame];
     
     UIImageView *mLogoImage=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Logo"]];
@@ -72,6 +74,7 @@
     [mRegisterButton addTarget:self action:@selector(onRegisterButton) forControlEvents:UIControlEventTouchUpInside];
     [[self view] addSubview:mRegisterButton];
     
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,10 +108,10 @@
     NSMutableDictionary *backJSON=[[iPinRequestCenter sharedInstance] sendRequest:sendJSON];
     if(backJSON!=nil)
     {
-        NSLog(@"%@",[backJSON objectForKey:@"result"]);
-        if(1==(NSInteger)[backJSON objectForKey:@"result"])
+        NSInteger result=[(NSNumber *)[backJSON objectForKey:@"result"] intValue];
+        if(result==1)
         {
-            
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
         {
@@ -128,22 +131,9 @@
     NSLog(@"Register");
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    mTextField=textField;
-}
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    mTextField=textField;
-}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    mTextField=textField;
-    [mTextField resignFirstResponder];
-    return YES;
-}
+
 
 /*
 #pragma mark - Navigation
