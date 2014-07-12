@@ -21,6 +21,7 @@
 @interface iPinMainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,RefreshHeaderAndFooterViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSMutableArray *listItem;
+    bool isFirstShow;
 }
 
 @property(nonatomic,weak)RefreshHeaderAndFooterView * refreshHeaderAndFooterView;

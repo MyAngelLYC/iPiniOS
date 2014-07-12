@@ -123,12 +123,33 @@
     
     listItem=[[NSMutableArray alloc] init];
     
+    isFirstShow=true;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self presentViewController:[[iPinLoginViewController alloc] init] animated:YES completion:nil];
+    //启动登陆界面
+    if(isFirstShow)
+        [self presentViewController:[[iPinLoginViewController alloc] init] animated:YES completion:^(){
+            isFirstShow=false;
+        }];
+    else
+    {
+        NSString *sqlCmd=@"select * from loginUser";
+        sqlite3_stmt *statement;
+        [[iPinDatabaseCenter sharedInstance] openDatabase];
+        sqlite3_prepare_v2([[iPinDatabaseCenter sharedInstance] getDatabase], [sqlCmd UTF8String], -1, &statement, nil);
+        while(sqlite3_step(statement)==SQLITE_ROW)
+        {
+            char *name=(char*)sqlite3_column_text(statement, 1);
+            NSString *ID=[[NSString alloc] initWithUTF8String:name];
+            NSLog(@"%@",ID);
+        }
+        [[iPinDatabaseCenter sharedInstance]closeDatabase];
+        sqlite3_finalize(statement);
+    }
 }
 
 - (void)didReceiveMemoryWarning

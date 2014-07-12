@@ -27,7 +27,7 @@ static iPinDatabaseCenter *sharedSingleton = nil;
     if(database==nil)
     {
         NSArray *documentsPaths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-        NSString *databaseFilePath=[[documentsPaths objectAtIndex:0] stringByAppendingPathComponent:@"iPin"];
+        NSString *databaseFilePath=[[documentsPaths objectAtIndex:0] stringByAppendingPathComponent:@"iPin.sqlite"];
         sqlite3_open([databaseFilePath UTF8String], &database);
     }
 }
@@ -44,5 +44,21 @@ static iPinDatabaseCenter *sharedSingleton = nil;
 - (sqlite3 *)getDatabase
 {
     return database;
+}
+
+- (int)execSQL:(NSString *)sqlCmd
+{
+    [self openDatabase];
+    int result=sqlite3_exec(database, [sqlCmd UTF8String], NULL, NULL, NULL);
+    [self closeDatabase];
+    return result;
+}
+
+- (int)execSQL:(NSString *)sqlCmd forResult:(sqlite3_stmt *)statement
+{
+    [self openDatabase];
+    int result=sqlite3_prepare_v2(database, [sqlCmd UTF8String], -1, &statement, nil);
+    [self closeDatabase];
+    return result;
 }
 @end

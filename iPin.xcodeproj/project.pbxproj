@@ -81,6 +81,7 @@
 		00E5B0E91949454A000740EA /* information_frame_female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E5B0E71949454A000740EA /* information_frame_female@2x.png */; };
 		00E5B0EA1949454A000740EA /* information_frame_male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E5B0E81949454A000740EA /* information_frame_male@2x.png */; };
 		00E5B0F119495214000740EA /* iPinListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E5B0F019495214000740EA /* iPinListItem.m */; };
+		07203BA61971370F0022D185 /* iPinRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07203BA51971370F0022D185 /* iPinRegisterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +192,8 @@
 		00E5B0E81949454A000740EA /* information_frame_male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "information_frame_male@2x.png"; sourceTree = "<group>"; };
 		00E5B0EF19495214000740EA /* iPinListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinListItem.h; sourceTree = "<group>"; };
 		00E5B0F019495214000740EA /* iPinListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinListItem.m; sourceTree = "<group>"; };
+		07203BA41971370F0022D185 /* iPinRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinRegisterViewController.h; sourceTree = "<group>"; };
+		07203BA51971370F0022D185 /* iPinRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinRegisterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,8 +344,6 @@
 		0022B397194B46E80093788E /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				001602EC19488D7700CA8EDD /* AppImage */,
-				0020F719196292D70067B896 /* LoginViewImage */,
 				0022B395194B46870093788E /* MainViewImage */,
 				001B90E9194BF4CF0082C0D1 /* PersonViewImage */,
 				0007177B194D8DA200F5CDF5 /* ShareViewImage */,
@@ -459,10 +460,9 @@
 		00A5255019487F0700450943 /* iPin */ = {
 			isa = PBXGroup;
 			children = (
-				00A5255919487F0700450943 /* iPinAppDelegate.h */,
-				00A5255A19487F0700450943 /* iPinAppDelegate.m */,
-				0020F716196291AB0067B896 /* iPinLoginViewController.h */,
-				0020F717196291AB0067B896 /* iPinLoginViewController.m */,
+				07203BA0197136770022D185 /* iPinApp */,
+				07203BA2197136A70022D185 /* LoginView */,
+				07203BA3197136EB0022D185 /* RegisterView */,
 				001602F919488E9F00CA8EDD /* iPinMainViewController.h */,
 				001602FA19488E9F00CA8EDD /* iPinMainViewController.m */,
 				004B218C194B310B006563E9 /* iPinPublishViewController.h */,
@@ -517,6 +517,35 @@
 				00A5257019487F0800450943 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		07203BA0197136770022D185 /* iPinApp */ = {
+			isa = PBXGroup;
+			children = (
+				00A5255919487F0700450943 /* iPinAppDelegate.h */,
+				00A5255A19487F0700450943 /* iPinAppDelegate.m */,
+				001602EC19488D7700CA8EDD /* AppImage */,
+			);
+			name = iPinApp;
+			sourceTree = "<group>";
+		};
+		07203BA2197136A70022D185 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				0020F716196291AB0067B896 /* iPinLoginViewController.h */,
+				0020F717196291AB0067B896 /* iPinLoginViewController.m */,
+				0020F719196292D70067B896 /* LoginViewImage */,
+			);
+			name = LoginView;
+			sourceTree = "<group>";
+		};
+		07203BA3197136EB0022D185 /* RegisterView */ = {
+			isa = PBXGroup;
+			children = (
+				07203BA41971370F0022D185 /* iPinRegisterViewController.h */,
+				07203BA51971370F0022D185 /* iPinRegisterViewController.m */,
+			);
+			name = RegisterView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -669,6 +698,7 @@
 				00A5255719487F0700450943 /* main.m in Sources */,
 				00E5B0F119495214000740EA /* iPinListItem.m in Sources */,
 				001602FB19488E9F00CA8EDD /* iPinMainViewController.m in Sources */,
+				07203BA61971370F0022D185 /* iPinRegisterViewController.m in Sources */,
 				000780E119699A7E00A0E70E /* iPinDatabaseCenter.m in Sources */,
 				0020F718196291AB0067B896 /* iPinLoginViewController.m in Sources */,
 				00071775194D8AED00F5CDF5 /* SGAlertMenu.m in Sources */,
@@ -788,6 +818,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wang Pei (P76KYDXV76)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iPin/iPin-Prefix.pch";
 				INFOPLIST_FILE = "iPin/iPin-Info.plist";
@@ -807,6 +838,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wang Pei (P76KYDXV76)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iPin/iPin-Prefix.pch";
 				INFOPLIST_FILE = "iPin/iPin-Info.plist";

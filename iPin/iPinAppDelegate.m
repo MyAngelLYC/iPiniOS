@@ -17,22 +17,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Override point for customization after application launch.
     //启动后显示状态条
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window setRootViewController:[[iPinMainViewController alloc] init]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    [self.window setRootViewController:[[iPinMainViewController alloc] init]];
     [self.window makeKeyAndVisible];
-    //设置进程睡眠，以保证LaunchImage的显示时间
     
+    //进行版本号码读取
     NSMutableDictionary *sendJSON=[[NSMutableDictionary alloc] init];
     [sendJSON setObject:@"VersionCheck" forKey:@"cmd"];
     NSMutableDictionary *backJSON=[[iPinRequestCenter sharedInstance] sendRequest:sendJSON];
     if(backJSON!=nil)
         NSLog(@"%@",[backJSON objectForKey:@"version"]);
+    
+    //版本更新
+    
+    //完成数据库的初始化
+    [[iPinDatabaseCenter sharedInstance] openDatabase];
+    [[iPinDatabaseCenter sharedInstance] closeDatabase];
+    
+    //进行微信分享的注册
     [[iPinShareCenter sharedInstance] registerApp];
-    //[NSThread sleepForTimeInterval:1.5];
+
     return YES;
 }
 

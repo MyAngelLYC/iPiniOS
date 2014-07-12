@@ -10,6 +10,7 @@
 #import "BaseViewController.h"
 #import "iPinRequestCenter.h"
 #import "iPinDatabaseCenter.h"
+#import "iPinRegisterViewController.h"
 
 @interface iPinLoginViewController : BaseViewController
 {

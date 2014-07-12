@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    // 绘制登陆界面
     [[self view] setBackgroundColor:[UIColor whiteColor]];
     
     CGRect viewBounds=[[UIScreen mainScreen]applicationFrame];
@@ -85,7 +86,6 @@
 
 - (void)onLoginButton
 {
-    NSLog(@"Login");
     NSString *username=[mUsernameTextField text];
     NSString *password=[mPasswordTextField text];
     if([username isEqualToString:@""])
@@ -111,15 +111,20 @@
         NSInteger result=[(NSNumber *)[backJSON objectForKey:@"result"] intValue];
         if(result==1)
         {
-            [[iPinDatabaseCenter sharedInstance] openDatabase];
-            sqlite3 *database=[[iPinDatabaseCenter sharedInstance] getDatabase];
-            char *errorMsg;
-            const char *createSql="create table if not exists loginUser (name text)";
-            if (sqlite3_exec(database, createSql, NULL, NULL, &errorMsg)==SQLITE_OK) {
-                NSLog(@"create ok.");   
+            NSString *sqlCmd=@"create table if not exists loginUser (ID varchar(9),username varchar(20),password varchar(32),sex varchar(10),telephone varchar(11),auth varchar(1),StudentID varchar(9),PersonID varchar(6),autoLogin int(1))";
+            if([[iPinDatabaseCenter sharedInstance] execSQL:sqlCmd]==SQLITE_OK)
+            {
+                sqlCmd=@"delete from loginUser where 1";
+                [[iPinDatabaseCenter sharedInstance] execSQL:sqlCmd];
+                NSString *ID=[backJSON objectForKey:@"ID"];
+                NSString *sex=[backJSON objectForKey:@"sex"];
+                NSString *telephone=[backJSON objectForKey:@"telephone"];
+                NSString *auth=[backJSON objectForKey:@"Auth"];
+                NSString *StudentID=[backJSON objectForKey:@"StudentID"];
+                NSString *PersonID=[backJSON objectForKey:@"PersonID"];
+                sqlCmd=[NSString stringWithFormat:@"insert into loginUser (ID,username,password,sex,telephone,auth,StudentID,PersonID,autoLogin) values ('%@','%@','%@','%@','%@','%@','%@','%@','0')",ID,username,[[iPinRequestCenter sharedInstance]md5:password],sex,telephone,auth,StudentID,PersonID];
+                [[iPinDatabaseCenter sharedInstance] execSQL:sqlCmd];
             }
-            sqlite3_free(errorMsg);
-            [[iPinDatabaseCenter sharedInstance] closeDatabase];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
@@ -137,12 +142,8 @@
 
 - (void)onRegisterButton
 {
-    NSLog(@"Register");
+    [self presentViewController:[[iPinRegisterViewController alloc] init] animated:YES completion:nil];
 }
-
-
-
-
 
 /*
 #pragma mark - Navigation

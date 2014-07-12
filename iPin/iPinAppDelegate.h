@@ -11,6 +11,7 @@
 #import "iPinLoginViewController.h"
 #import "iPinShareCenter.h"
 #import "iPinRequestCenter.h"
+#import "iPinDatabaseCenter.h"
 
 @interface iPinAppDelegate : UIResponder <UIApplicationDelegate>
 
