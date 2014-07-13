@@ -35,8 +35,7 @@
     //版本更新
     
     //完成数据库的初始化
-    [[iPinDatabaseCenter sharedInstance] openDatabase];
-    [[iPinDatabaseCenter sharedInstance] closeDatabase];
+    [[iPinDatabaseCenter sharedInstance] initDatabase];
     
     //进行微信分享的注册
     [[iPinShareCenter sharedInstance] registerApp];

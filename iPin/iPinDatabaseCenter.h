@@ -15,10 +15,10 @@
 }
 
 + (iPinDatabaseCenter *)sharedInstance;
+- (void)initDatabase;
 - (void)openDatabase;
 - (void)closeDatabase;
 - (sqlite3 *)getDatabase;
 - (int)execSQL:(NSString *)sqlCmd;
-- (int)execSQL:(NSString *)sqlCmd forResult:(sqlite3_stmt *)statement;
 @end
 

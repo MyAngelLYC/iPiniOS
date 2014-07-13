@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+#import "iPinRequestCenter.h"
+#import "iPinDatabaseCenter.h"
 
-@interface iPinRegisterViewController : UIViewController
+@interface iPinRegisterViewController : BaseViewController
+{
+    UITextField *mUsernameTextField;
+    UITextField *mPasswordTextField;
+    UITextField *mConfirmPasswordTextField;
+    UITextField *mTelephoneTextField;
+}
 
+- (void)onBackButton;
+- (void)onRegisterButton;
 @end

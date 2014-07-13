@@ -60,28 +60,45 @@
     [mPasswordTextfield setReturnKeyType:UIReturnKeyDone];
     [mPasswordTextfield setSecureTextEntry:YES];
     [mPasswordTextfield setText:@""];
+    [mPasswordTextfield setKeyboardType:UIKeyboardTypeAlphabet];
     [[self view] addSubview:mPasswordTextfield];
     mPasswordTextField=mPasswordTextfield;
     
     UIButton *mLoginButton=[[UIButton alloc] initWithFrame:CGRectMake(viewBounds.size.width/2-81, 320, 71, 25)];
-    [mLoginButton setBackgroundImage:[UIImage imageNamed:@"Button"] forState:UIControlStateNormal];
+    [mLoginButton setBackgroundImage:[UIImage imageNamed:@"BlueButton"] forState:UIControlStateNormal];
     [mLoginButton setTitle:@"登陆" forState:UIControlStateNormal];
     [mLoginButton addTarget:self action:@selector(onLoginButton) forControlEvents:UIControlEventTouchUpInside];
     [[self view] addSubview:mLoginButton];
     
     UIButton *mRegisterButton=[[UIButton alloc] initWithFrame:CGRectMake(viewBounds.size.width/2+10, 320, 71, 25)];
-    [mRegisterButton setBackgroundImage:[UIImage imageNamed:@"Button"] forState:UIControlStateNormal];
+    [mRegisterButton setBackgroundImage:[UIImage imageNamed:@"BlueButton"] forState:UIControlStateNormal];
     [mRegisterButton setTitle:@"注册" forState:UIControlStateNormal];
     [mRegisterButton addTarget:self action:@selector(onRegisterButton) forControlEvents:UIControlEventTouchUpInside];
     [[self view] addSubview:mRegisterButton];
-    
-
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    //从本地数据库读取数据自动填充username文本框
+    NSString *sqlCmd=@"select * from loginUser";
+    sqlite3_stmt *statement;
+    [[iPinDatabaseCenter sharedInstance] openDatabase];
+    sqlite3_prepare_v2([[iPinDatabaseCenter sharedInstance] getDatabase], [sqlCmd UTF8String], -1, &statement, nil);
+    if(SQLITE_ROW==sqlite3_step(statement))
+    {
+        char *name=(char*)sqlite3_column_text(statement, 1);
+        NSString *username=[[NSString alloc] initWithUTF8String:name];
+        [mUsernameTextField setText:username];
+    }
+    [[iPinDatabaseCenter sharedInstance] closeDatabase];
+    sqlite3_finalize(statement);
 }
 
 - (void)onLoginButton
@@ -111,20 +128,16 @@
         NSInteger result=[(NSNumber *)[backJSON objectForKey:@"result"] intValue];
         if(result==1)
         {
-            NSString *sqlCmd=@"create table if not exists loginUser (ID varchar(9),username varchar(20),password varchar(32),sex varchar(10),telephone varchar(11),auth varchar(1),StudentID varchar(9),PersonID varchar(6),autoLogin int(1))";
-            if([[iPinDatabaseCenter sharedInstance] execSQL:sqlCmd]==SQLITE_OK)
-            {
-                sqlCmd=@"delete from loginUser where 1";
-                [[iPinDatabaseCenter sharedInstance] execSQL:sqlCmd];
-                NSString *ID=[backJSON objectForKey:@"ID"];
-                NSString *sex=[backJSON objectForKey:@"sex"];
-                NSString *telephone=[backJSON objectForKey:@"telephone"];
-                NSString *auth=[backJSON objectForKey:@"Auth"];
-                NSString *StudentID=[backJSON objectForKey:@"StudentID"];
-                NSString *PersonID=[backJSON objectForKey:@"PersonID"];
-                sqlCmd=[NSString stringWithFormat:@"insert into loginUser (ID,username,password,sex,telephone,auth,StudentID,PersonID,autoLogin) values ('%@','%@','%@','%@','%@','%@','%@','%@','0')",ID,username,[[iPinRequestCenter sharedInstance]md5:password],sex,telephone,auth,StudentID,PersonID];
-                [[iPinDatabaseCenter sharedInstance] execSQL:sqlCmd];
-            }
+            NSString *sqlCmd=@"delete from loginUser where 1";
+            [[iPinDatabaseCenter sharedInstance] execSQL:sqlCmd];
+            NSString *ID=[backJSON objectForKey:@"ID"];
+            NSString *sex=[backJSON objectForKey:@"sex"];
+            NSString *telephone=[backJSON objectForKey:@"telephone"];
+            NSString *auth=[backJSON objectForKey:@"Auth"];
+            NSString *StudentID=[backJSON objectForKey:@"StudentID"];
+            NSString *PersonID=[backJSON objectForKey:@"PersonID"];
+            sqlCmd=[NSString stringWithFormat:@"insert into loginUser (ID,username,password,sex,telephone,auth,StudentID,PersonID,autoLogin) values ('%@','%@','%@','%@','%@','%@','%@','%@','0')",ID,username,[[iPinRequestCenter sharedInstance]md5:password],sex,telephone,auth,StudentID,PersonID];
+            [[iPinDatabaseCenter sharedInstance] execSQL:sqlCmd];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else

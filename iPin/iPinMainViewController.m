@@ -14,8 +14,8 @@
 
 @implementation iPinMainViewController
 
-@synthesize refreshHeaderAndFooterView ;
-@synthesize reloading ;
+@synthesize refreshHeaderAndFooterView;
+@synthesize reloading;
 @synthesize myScrollView;
 @synthesize myTableView;
 @synthesize mainView;

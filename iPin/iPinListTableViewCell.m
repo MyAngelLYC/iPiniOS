@@ -30,7 +30,7 @@
 
 - (void)setItem:(iPinListItem *)item
 {
-    [fromPlace setText:[item fromPlace]];
+    [fromPlace setText:item.fromPlace];
     [toPlace setText:[item toPlace]];
     [time setText:[item date]];
     [username setText:[item username]];

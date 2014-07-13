@@ -37,7 +37,7 @@
 		0020F71519628D450067B896 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0020F71419628D450067B896 /* LaunchImage@2x.png */; };
 		0020F718196291AB0067B896 /* iPinLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0020F717196291AB0067B896 /* iPinLoginViewController.m */; };
 		0020F71B196292F80067B896 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0020F71A196292F80067B896 /* Logo@2x.png */; };
-		0020F71D1966FE790067B896 /* Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0020F71C1966FE790067B896 /* Button@2x.png */; };
+		0020F71D1966FE790067B896 /* BlueButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0020F71C1966FE790067B896 /* BlueButton@2x.png */; };
 		0020F720196705D90067B896 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0020F71F196705D90067B896 /* BaseViewController.m */; };
 		0022B392194B44050093788E /* release_title_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022B391194B44050093788E /* release_title_bar@2x.png */; };
 		0022B394194B446D0093788E /* back_function@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0022B393194B446D0093788E /* back_function@2x.png */; };
@@ -82,6 +82,9 @@
 		00E5B0EA1949454A000740EA /* information_frame_male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E5B0E81949454A000740EA /* information_frame_male@2x.png */; };
 		00E5B0F119495214000740EA /* iPinListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E5B0F019495214000740EA /* iPinListItem.m */; };
 		07203BA61971370F0022D185 /* iPinRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07203BA51971370F0022D185 /* iPinRegisterViewController.m */; };
+		073B836C197225940070B38D /* main_title_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073B836B197225940070B38D /* main_title_bar@2x.png */; };
+		073B836E197226E90070B38D /* backBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073B836D197226E90070B38D /* backBtn@2x.png */; };
+		073B837019722E100070B38D /* RedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073B836F19722E100070B38D /* RedButton@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,7 +138,7 @@
 		0020F716196291AB0067B896 /* iPinLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinLoginViewController.h; sourceTree = "<group>"; };
 		0020F717196291AB0067B896 /* iPinLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinLoginViewController.m; sourceTree = "<group>"; };
 		0020F71A196292F80067B896 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
-		0020F71C1966FE790067B896 /* Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button@2x.png"; sourceTree = "<group>"; };
+		0020F71C1966FE790067B896 /* BlueButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlueButton@2x.png"; sourceTree = "<group>"; };
 		0020F71E196705D90067B896 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		0020F71F196705D90067B896 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		0022B391194B44050093788E /* release_title_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release_title_bar@2x.png"; sourceTree = "<group>"; };
@@ -182,7 +185,7 @@
 		00A5255919487F0700450943 /* iPinAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iPinAppDelegate.h; sourceTree = "<group>"; };
 		00A5255A19487F0700450943 /* iPinAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPinAppDelegate.m; sourceTree = "<group>"; };
 		00A5255D19487F0700450943 /* iPin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iPin.xcdatamodel; sourceTree = "<group>"; };
-		00A5255F19487F0700450943 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		00A5255F19487F0700450943 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iPin/Images.xcassets; sourceTree = "<group>"; };
 		00A5256519487F0700450943 /* iPinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A5256619487F0700450943 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		00A5256F19487F0800450943 /* iPinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iPinTests-Info.plist"; sourceTree = "<group>"; };
@@ -194,6 +197,9 @@
 		00E5B0F019495214000740EA /* iPinListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinListItem.m; sourceTree = "<group>"; };
 		07203BA41971370F0022D185 /* iPinRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPinRegisterViewController.h; sourceTree = "<group>"; };
 		07203BA51971370F0022D185 /* iPinRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPinRegisterViewController.m; sourceTree = "<group>"; };
+		073B836B197225940070B38D /* main_title_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_title_bar@2x.png"; sourceTree = "<group>"; };
+		073B836D197226E90070B38D /* backBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBtn@2x.png"; sourceTree = "<group>"; };
+		073B836F19722E100070B38D /* RedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedButton@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,7 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				0020F71A196292F80067B896 /* Logo@2x.png */,
-				0020F71C1966FE790067B896 /* Button@2x.png */,
+				0020F71C1966FE790067B896 /* BlueButton@2x.png */,
 			);
 			name = LoginViewImage;
 			sourceTree = "<group>";
@@ -344,7 +350,6 @@
 		0022B397194B46E80093788E /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				0022B395194B46870093788E /* MainViewImage */,
 				001B90E9194BF4CF0082C0D1 /* PersonViewImage */,
 				0007177B194D8DA200F5CDF5 /* ShareViewImage */,
 				0022B396194B46BF0093788E /* TableCellImage */,
@@ -425,6 +430,8 @@
 			children = (
 				0022B3A3194B4DFA0093788E /* Test.xib */,
 				00A5255019487F0700450943 /* iPin */,
+				00A5255F19487F0700450943 /* Images.xcassets */,
+				00A5255C19487F0700450943 /* iPin.xcdatamodeld */,
 				00A5256D19487F0800450943 /* iPinTests */,
 				00A5254719487F0700450943 /* Frameworks */,
 				00A5254619487F0700450943 /* Products */,
@@ -463,8 +470,7 @@
 				07203BA0197136770022D185 /* iPinApp */,
 				07203BA2197136A70022D185 /* LoginView */,
 				07203BA3197136EB0022D185 /* RegisterView */,
-				001602F919488E9F00CA8EDD /* iPinMainViewController.h */,
-				001602FA19488E9F00CA8EDD /* iPinMainViewController.m */,
+				073B83711972534E0070B38D /* MainView */,
 				004B218C194B310B006563E9 /* iPinPublishViewController.h */,
 				004B218D194B310B006563E9 /* iPinPublishViewController.m */,
 				0004637B194D79D70052B91F /* iPinNearbyViewController.h */,
@@ -476,8 +482,6 @@
 				004AD0071948AC9D004149B9 /* iPinListTableViewCell.xib */,
 				00E5B0EF19495214000740EA /* iPinListItem.h */,
 				00E5B0F019495214000740EA /* iPinListItem.m */,
-				00A5255F19487F0700450943 /* Images.xcassets */,
-				00A5255C19487F0700450943 /* iPin.xcdatamodeld */,
 				0020F721196705EB0067B896 /* BaseViewController */,
 				0090437C19625BE30057CECF /* RequestCenter */,
 				000780DE19699A4B00A0E70E /* DatabaseCenter */,
@@ -544,8 +548,29 @@
 			children = (
 				07203BA41971370F0022D185 /* iPinRegisterViewController.h */,
 				07203BA51971370F0022D185 /* iPinRegisterViewController.m */,
+				073B836A1972257A0070B38D /* RegisterViewImage */,
 			);
 			name = RegisterView;
+			sourceTree = "<group>";
+		};
+		073B836A1972257A0070B38D /* RegisterViewImage */ = {
+			isa = PBXGroup;
+			children = (
+				073B836B197225940070B38D /* main_title_bar@2x.png */,
+				073B836D197226E90070B38D /* backBtn@2x.png */,
+				073B836F19722E100070B38D /* RedButton@2x.png */,
+			);
+			name = RegisterViewImage;
+			sourceTree = "<group>";
+		};
+		073B83711972534E0070B38D /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				001602F919488E9F00CA8EDD /* iPinMainViewController.h */,
+				001602FA19488E9F00CA8EDD /* iPinMainViewController.m */,
+				0022B395194B46870093788E /* MainViewImage */,
+			);
+			name = MainView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -633,6 +658,7 @@
 				00046370194D79440052B91F /* nearby_title_bar@2x.png in Resources */,
 				00046376194D79610052B91F /* nearby_confirm_button@2x.png in Resources */,
 				0020F71519628D450067B896 /* LaunchImage@2x.png in Resources */,
+				073B837019722E100070B38D /* RedButton@2x.png in Resources */,
 				0027A7A6194EC5C000771248 /* settings_title_bar@2x.png in Resources */,
 				00A5256019487F0700450943 /* Images.xcassets in Resources */,
 				0027A7A2194EC5B600771248 /* settings_back_action@2x.png in Resources */,
@@ -640,6 +666,7 @@
 				001B90E6194BF46B0082C0D1 /* personal_center_bg@2x.png in Resources */,
 				0022B39A194B49570093788E /* release_information_bg@2x.png in Resources */,
 				00046375194D79610052B91F /* nearby_bottom_bar@2x.png in Resources */,
+				073B836E197226E90070B38D /* backBtn@2x.png in Resources */,
 				0022B3A2194B4B980093788E /* release_plus_button@2x.png in Resources */,
 				001602EE19488D8D00CA8EDD /* title_bar@2x.png in Resources */,
 				004AD0091948AC9D004149B9 /* iPinListTableViewCell.xib in Resources */,
@@ -658,11 +685,12 @@
 				002CC48619497EAB002A812C /* blueArrow.png in Resources */,
 				001602F319488DAE00CA8EDD /* release_function@2X.png in Resources */,
 				0004637A194D796D0052B91F /* nearby_male_frame_2@2x.png in Resources */,
-				0020F71D1966FE790067B896 /* Button@2x.png in Resources */,
+				0020F71D1966FE790067B896 /* BlueButton@2x.png in Resources */,
 				0090437919624F150057CECF /* Icon@2x.png in Resources */,
 				00E5B0EA1949454A000740EA /* information_frame_male@2x.png in Resources */,
 				00071782194D8DBD00F5CDF5 /* share_wechat_icon@2x.png in Resources */,
 				00071780194D8DBD00F5CDF5 /* share_pengyouquan_icon@2x.png in Resources */,
+				073B836C197225940070B38D /* main_title_bar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -932,7 +960,8 @@
 				00A5255D19487F0700450943 /* iPin.xcdatamodel */,
 			);
 			currentVersion = 00A5255D19487F0700450943 /* iPin.xcdatamodel */;
-			path = iPin.xcdatamodeld;
+			name = iPin.xcdatamodeld;
+			path = iPin/iPin.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

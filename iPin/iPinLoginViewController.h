@@ -16,7 +16,6 @@
 {
     UITextField *mUsernameTextField;
     UITextField *mPasswordTextField;
-
 }
 
 - (void)onLoginButton;

@@ -10,6 +10,8 @@
 
 @interface iPinListItem : NSObject
 
+@property(nonatomic,strong) NSString *GroupID;
+@property(nonatomic,strong) NSString *userID;
 @property(nonatomic,strong) NSString *username;
 @property(nonatomic,strong) NSString *sex;
 @property(nonatomic,strong) NSString *telephone;

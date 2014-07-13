@@ -10,21 +10,21 @@
 
 @implementation iPinListItem
 
-@synthesize username,sex,telephone,fromPlace,toPlace,date,detail;
+@synthesize GroupID,userID,username,sex,telephone,fromPlace,toPlace,date,detail,seats;
 
 - (iPinListItem*)initWithUsername:(NSString *)Username sex:(NSString *)Sex telephone:(NSString *)Telephone fromPlace:(NSString *)FromPlace toPlace:(NSString *)ToPlace date:(NSString *)Date detail:(NSString *)Detail seats:(NSString *)Seats
 {
     self=[super init];
     if(self)
     {
-        [self setUsername:Username];
-        [self setSex:Sex];
-        [self setTelephone:Telephone];
-        [self setFromPlace:FromPlace];
-        [self setToPlace:ToPlace];
-        [self setDate:Date];
-        [self setDetail:Detail];
-        [self setSeats:Seats];
+        username=Username;
+        sex=Sex;
+        telephone=Telephone;
+        fromPlace=FromPlace;
+        toPlace=ToPlace;
+        date=Date;
+        detail=Detail;
+        seats=Seats;
     }
     return self;
 }
